@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Flow from '../../components/Flow.astro';
+import DrainageMap from '../../components/DrainageMap.astro';
+import ZoneMap from '../../components/ZoneMap.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -36,6 +38,19 @@ const d = entry.data;
     <article class="prose">
       <Content />
     </article>
+
+    {d.diagram === 'drainage' && (
+      <section class="diagram">
+        <h2>図解: 排水先で変わる付随手続</h2>
+        <DrainageMap />
+      </section>
+    )}
+    {d.diagram === 'zone' && (
+      <section class="diagram">
+        <h2>図解: 区域と手続の関係</h2>
+        <ZoneMap />
+      </section>
+    )}
 
     <div class="note">
       <strong>ご注意</strong>: 各制度の運用（必要書類・審査期間・手数料・立地基準の当てはめ）は<strong>自治体によって異なります</strong>。

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ZoneMap from '../../components/ZoneMap.astro';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -12,6 +13,11 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
       <p class="lead">土地に関する許認可申請を専門としています。所要期間は目安です。自治体によって運用が異なるため、料金は役所調査のうえで確定額をお見積します。</p>
     </div>
 
+    <h2 style="margin-top:1rem">どの手続が必要になるか</h2>
+    <p>土地がどの区域にあるか、造成を伴うか、農地かどうかで必要な手続が決まります。まず全体像をご覧ください。</p>
+    <ZoneMap />
+
+    <h2>業務の一覧</h2>
     <div class="list">
       {services.map((s) => (
         <a class="card svc" href={`/services/${s.id}/`}>

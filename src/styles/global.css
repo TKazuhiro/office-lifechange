@@ -26,7 +26,8 @@ body {
 a { color: var(--navy); }
 a:hover { color: var(--accent); }
 img { max-width: 100%; height: auto; }
-h1, h2, h3 { line-height: 1.4; margin: 0 0 .6em; color: var(--navy-dark); font-weight: 700; }
+h1, h2, h3 { line-height: 1.4; margin: 0 0 .6em; color: var(--navy-dark); font-weight: 700; text-wrap: balance; }
+p, li, dd, blockquote, figcaption, .card h3, .flow__title, .flow__note { text-wrap: pretty; }
 h1 { font-size: 1.85rem; }
 h2 { font-size: 1.4rem; margin-top: 2.2em; padding-left: .6em; border-left: 4px solid var(--accent); }
 h3 { font-size: 1.1rem; margin-top: 1.6em; }
@@ -51,7 +52,8 @@ th { background: var(--note-bg); white-space: nowrap; }
 .btn--ghost:hover { background: var(--navy); color: #fff; }
 .grid { display: grid; gap: 1.2rem; }
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.grid--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); }
 .card {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 1.4rem 1.5rem; text-decoration: none; color: inherit; display: block;

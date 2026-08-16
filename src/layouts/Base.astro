@@ -50,8 +50,11 @@ const current = Astro.url.pathname;
     <header class="site-header">
       <div class="wrap site-header__in">
         <a class="brand" href="/">
-          <img class="brand__logo" src="/images/title_logo.png" alt={site.name} width="350" height="90" />
-          <span class="brand__sub">都市計画法・盛土規制法・農地法の許認可申請</span>
+          <img class="brand__mark" src="/images/logo_1.png" alt="" width="500" height="500" />
+          <span class="brand__text">
+            <span class="brand__name">{site.name}</span>
+            <span class="brand__sub">都市計画法・盛土規制法・農地法の許認可申請</span>
+          </span>
         </a>
         <button class="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="gnav">☰</button>
         <nav id="gnav" class="gnav">
@@ -101,9 +104,12 @@ const current = Astro.url.pathname;
 <style>
   .site-header { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
   .site-header__in { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 1rem; flex-wrap: wrap; }
-  .brand { text-decoration: none; display: flex; flex-direction: column; line-height: 1.25; padding: .5rem 0; gap: .15rem; }
-  .brand__logo { height: 34px; width: auto; display: block; }
-  .brand__sub { font-size: .68rem; color: var(--muted); padding-left: 2px; }
+  .brand { text-decoration: none; display: flex; align-items: center; gap: .6rem; line-height: 1.2; padding: .5rem 0; flex: 0 0 auto; }
+  .brand__mark { width: 40px; height: 40px; flex: 0 0 40px; display: block; }
+  .brand__text { display: flex; flex-direction: column; }
+  .brand__name { font-weight: 800; color: var(--navy-dark); font-size: 1.15rem; letter-spacing: .03em; white-space: nowrap; }
+  .brand__sub { font-size: .68rem; color: var(--muted); white-space: nowrap; }
+  @media (max-width: 400px) { .brand__sub { display: none; } }
   .gnav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.2rem; }
   .gnav a { text-decoration: none; font-size: .92rem; font-weight: 600; color: var(--text); padding: .4em 0; border-bottom: 2px solid transparent; }
   .gnav a:hover, .gnav a[aria-current="page"] { border-color: var(--accent); color: var(--navy); }

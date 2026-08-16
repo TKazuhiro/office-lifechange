@@ -16,13 +16,8 @@ const flow = [
   { title: '許可', note: '完了検査等が必要な場合はその対応まで' },
 ];
 
-const works = [
-  { src: '/images/godo_kansei.jpg', alt: '造成完了後の宅地', cap: '岐阜県安八郡神戸町｜造成完了' },
-  { src: '/images/tarui_kansei.jpg', alt: '造成完了後の宅地', cap: '岐阜県不破郡垂井町｜造成完了' },
-  { src: '/images/kasugai_sabou_kansei.jpg', alt: '砂防指定地内の造成完了', cap: '愛知県春日井市｜砂防指定地内の造成完了' },
-  { src: '/images/ogaki_kansei.jpg', alt: '造成完了後の道路と宅地', cap: '岐阜県大垣市｜造成完了' },
-  { src: '/images/ikeda_zousei.jpg', alt: '造成工事中の現場', cap: '岐阜県揖斐郡池田町｜造成中' },
-];
+import { works as allWorks } from '../data/works';
+const works = allWorks.slice(0, 3);
 ---
 <Base>
   <section class="hero">
@@ -44,11 +39,11 @@ const works = [
   <section class="section">
     <div class="wrap">
       <h2>取扱業務</h2>
-      <div class="grid grid--3">
+      <div class="grid grid--4">
         {services.map((s) => (
           <a class="card" href={`/services/${s.id}/`}>
             <span class="tag">{s.data.law}</span>
-            <h3>{s.data.title}</h3>
+            <h3>{s.data.title.split('（')[0]}</h3>
             <p class="small">{s.data.short}</p>
             <span class="more">詳しく見る →</span>
           </a>
@@ -109,6 +104,7 @@ const works = [
           </figure>
         ))}
       </div>
+      <p style="margin-top:1rem"><a class="btn btn--ghost" href="/works/">現場写真をもっと見る</a></p>
     </div>
   </section>
 

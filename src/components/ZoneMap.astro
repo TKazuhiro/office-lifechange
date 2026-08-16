@@ -1,0 +1,83 @@
+---
+/** 都市計画区域の概念図: 市街化区域／市街化調整区域と、43条・29条・60条の使い分け */
+---
+<figure class="zone">
+  <svg viewBox="0 0 900 430" role="img" aria-labelledby="zone-title zone-desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="zone-title">市街化区域と市街化調整区域、必要な手続の概念図</title>
+    <desc id="zone-desc">都市計画区域は市街化区域と市街化調整区域に分かれる。市街化区域では一定規模以上の開発行為に開発許可（29条）が必要。市街化調整区域では、区画形質の変更を伴えば開発許可（29条）、建物を建てるだけなら建築許可（43条）、許可が不要な建築でも建築確認に60条証明が必要。</desc>
+    <defs>
+      <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#c9d3df" stroke-width="2"/>
+      </pattern>
+    </defs>
+    <!-- 都市計画区域 外枠 -->
+    <rect x="20" y="40" width="860" height="330" rx="16" fill="#f7f5ee" stroke="#b8912e" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="36" y="30" font-size="15" font-weight="700" fill="#8a6d1c">都市計画区域</text>
+
+    <!-- 市街化区域 -->
+    <rect x="44" y="70" width="330" height="270" rx="12" fill="#e9eff6" stroke="#1f3a5f" stroke-width="2"/>
+    <text x="209" y="100" font-size="20" font-weight="800" fill="#162a45" text-anchor="middle">市街化区域</text>
+    <text x="209" y="124" font-size="13" fill="#5f6770" text-anchor="middle">すでに市街地／計画的に市街化する区域</text>
+    <!-- 建物アイコン群 -->
+    <g fill="#1f3a5f" opacity=".85">
+      <rect x="80" y="180" width="40" height="70"/>
+      <rect x="130" y="160" width="46" height="90"/>
+      <rect x="186" y="195" width="36" height="55"/>
+      <rect x="232" y="170" width="50" height="80"/>
+      <rect x="292" y="200" width="42" height="50"/>
+    </g>
+    <rect x="70" y="250" width="290" height="6" fill="#8fa0b5"/>
+    <rect x="60" y="270" width="298" height="56" rx="8" fill="#fff" stroke="#c9d3df"/>
+    <text x="209" y="292" font-size="13" font-weight="700" fill="#162a45" text-anchor="middle">一定規模以上の造成・区画変更</text>
+    <text x="209" y="312" font-size="13" fill="#1f3a5f" text-anchor="middle">→ 開発許可（29条）</text>
+
+    <!-- 市街化調整区域 -->
+    <rect x="404" y="70" width="452" height="270" rx="12" fill="url(#hatch)" stroke="#1f3a5f" stroke-width="2"/>
+    <rect x="404" y="70" width="452" height="270" rx="12" fill="#f1f6ea" opacity=".85"/>
+    <text x="630" y="100" font-size="20" font-weight="800" fill="#162a45" text-anchor="middle">市街化調整区域</text>
+    <text x="630" y="124" font-size="13" fill="#5f6770" text-anchor="middle">市街化を抑制する区域 ＝ 建てるには原則として許可が必要</text>
+    <!-- 田・家アイコン -->
+    <g stroke="#7a9a5a" stroke-width="2" fill="none">
+      <rect x="430" y="150" width="60" height="34"/><line x1="430" y1="167" x2="490" y2="167"/>
+      <rect x="500" y="150" width="60" height="34"/><line x1="500" y1="167" x2="560" y2="167"/>
+    </g>
+    <g fill="#1f3a5f">
+      <polygon points="600,150 625,130 650,150"/><rect x="606" y="150" width="38" height="30"/>
+    </g>
+    <g stroke="#7a9a5a" stroke-width="2" fill="none">
+      <rect x="670" y="150" width="60" height="34"/><line x1="670" y1="167" x2="730" y2="167"/>
+    </g>
+    <!-- 3つの箱 -->
+    <g font-size="12.5" text-anchor="middle">
+      <rect x="418" y="200" width="138" height="126" rx="8" fill="#fff" stroke="#c9d3df"/>
+      <text x="487" y="222" font-weight="700" fill="#162a45">造成・区画変更を</text>
+      <text x="487" y="239" font-weight="700" fill="#162a45">伴って建てる</text>
+      <line x1="440" y1="252" x2="534" y2="252" stroke="#e3e0d8"/>
+      <text x="487" y="276" fill="#1f3a5f" font-weight="700">開発許可</text>
+      <text x="487" y="294" fill="#1f3a5f">（29条）</text>
+
+      <rect x="561" y="200" width="138" height="126" rx="8" fill="#fff" stroke="#c9d3df"/>
+      <text x="630" y="222" font-weight="700" fill="#162a45">既存の宅地などに</text>
+      <text x="630" y="239" font-weight="700" fill="#162a45">建物を建てる</text>
+      <line x1="583" y1="252" x2="677" y2="252" stroke="#e3e0d8"/>
+      <text x="630" y="276" fill="#1f3a5f" font-weight="700">建築許可</text>
+      <text x="630" y="294" fill="#1f3a5f">（43条）</text>
+
+      <rect x="704" y="200" width="138" height="126" rx="8" fill="#fff" stroke="#c9d3df"/>
+      <text x="773" y="222" font-weight="700" fill="#162a45">許可が不要な建築</text>
+      <text x="773" y="239" font-weight="700" fill="#162a45">（確認申請の添付）</text>
+      <line x1="726" y1="252" x2="820" y2="252" stroke="#e3e0d8"/>
+      <text x="773" y="276" fill="#1f3a5f" font-weight="700">60条証明</text>
+      <text x="773" y="294" fill="#1f3a5f">（不要証明）</text>
+    </g>
+
+    <text x="36" y="402" font-size="12.5" fill="#5f6770">※ 農地なら農地法、一定規模の盛土・切土なら盛土規制法、排水の接続には占用許可が、区域を問わず併せて必要になります</text>
+  </svg>
+  <figcaption>市街化区域・市街化調整区域と、必要になる主な手続（概念図。区域指定や運用は自治体により異なります）</figcaption>
+</figure>
+
+<style>
+  .zone { margin: 1.5rem 0 2rem; }
+  .zone svg { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+  .zone figcaption { font-size: .82rem; color: var(--muted); margin-top: .5em; }
+</style>

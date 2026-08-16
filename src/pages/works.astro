@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { works } from '../data/works';
+---
+<Base title="現場写真" description="Life行政書士事務所が許認可を担当した造成・建築の現場写真。">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> › 現場写真</p>
+    <div class="page-head">
+      <h1>これまでの現場から</h1>
+      <p class="lead">当事務所が許認可を担当した造成・建築の現場です。依頼者様の情報保護のため、所在地の詳細は掲載していません。</p>
+    </div>
+
+    <div class="works">
+      {works.map((w) => (
+        <figure class="works__item">
+          <img src={w.src} alt={w.alt} loading="lazy" width="1600" height="1200" />
+          <figcaption><strong>{w.cap}</strong><br /><span class="small">関係した手続: {w.kind}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <div class="cta">
+      <h2>ご相談・お見積のご依頼</h2>
+      <a class="btn" href="/contact/">お問い合わせフォームへ</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .works { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; margin-top: 1rem; }
+  .works__item { margin: 0; }
+  .works__item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); display: block; }
+  .works__item figcaption { margin-top: .5em; font-size: .92rem; }
+</style>
