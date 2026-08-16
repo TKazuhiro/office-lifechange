@@ -24,10 +24,10 @@ const works = allWorks.slice(0, 3);
     <div class="hero__bg" style="background-image:url('/images/den.jpg')"></div>
     <div class="wrap hero__in">
       <p class="eyebrow">岐阜県・愛知県・三重県</p>
-      <h1>土地の許認可申請を専門とする<br class="pc" />行政書士事務所</h1>
+      <h1>土地の許認可で、<br class="sp" />計画を止めない。</h1>
       <p class="lead">
-        開発許可・建築許可・盛土規制法・農地転用・占用許可など。<br class="pc" />
-        まず調べて、必要な手続を確定してからお見積します。
+        調整区域・農地・盛土など判断に迷う土地の手続を見極め、<br class="pc" />
+        申請から許可までを引き受ける行政書士事務所です。
       </p>
       <div class="hero__actions">
         <a class="btn" href="/services/">業務一覧を見る</a>
@@ -171,5 +171,7 @@ const works = allWorks.slice(0, 3);
   .news { list-style: none; padding: 0; margin: 0; }
   .news li { display: flex; gap: 1.2rem; padding: .6em 0; border-bottom: 1px solid var(--line); }
   .news time { color: var(--muted); font-size: .9rem; white-space: nowrap; }
-  @media (max-width: 640px) { .pc { display: none; } .hero h1 { font-size: 1.45rem; } .hero { padding: 3rem 0 2.5rem; } }
+  .sp { display: none; }
+  .hero h1 { font-size: 2.2rem; letter-spacing: .02em; }
+  @media (max-width: 640px) { .pc { display: none; } .sp { display: inline; } .hero h1 { font-size: 1.6rem; } .hero { padding: 3rem 0 2.5rem; } }
 </style>
