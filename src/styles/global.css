@@ -79,6 +79,25 @@ a.card:hover { box-shadow: 0 6px 20px rgba(31,58,95,.10); transform: translateY(
 .cta p { color: #dfe6ef; }
 .cta .btn { background: #fff; color: var(--navy); border-color: #fff; }
 .cta .btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cta__tel { margin: 1.2rem 0 .2rem; }
+.cta__tel a { color: #fff; font-weight: 800; font-size: 1.35rem; text-decoration: none; letter-spacing: .02em; }
+.cta__tel a:hover { color: var(--accent); }
+.cta__hours { margin: 0; font-size: .85rem; color: #c9d3df; }
+.cta__hours .nowrap { display: inline-block; white-space: nowrap; }
+.cta__hours .nowrap + .nowrap::before { content: '／'; margin: 0 .4em; color: #8fa0b5; }
+@media (max-width: 640px) {
+  .cta__hours .nowrap { display: block; }
+  .cta__hours .nowrap + .nowrap::before { content: none; }
+}
+/* 図解のクリック拡大 */
+figure[data-zoom] svg { cursor: zoom-in; }
+.zoom-hint { display: inline-block; font-size: .78rem; color: var(--muted); margin-left: .5em; }
+dialog.zoom { border: 0; padding: 0; background: rgba(15,25,40,.92); max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; margin: 0; }
+dialog.zoom::backdrop { background: rgba(15,25,40,.6); }
+dialog.zoom .zoom__scroll { width: 100%; height: 100%; overflow: auto; -webkit-overflow-scrolling: touch; padding: 3.5rem 1rem 1rem; box-sizing: border-box; }
+dialog.zoom svg { display: block; width: max(1000px, 100%); height: auto; background: #fff; border-radius: 8px; margin: 0 auto; }
+dialog.zoom .zoom__close { position: fixed; top: .8rem; right: .8rem; z-index: 2; background: #fff; color: var(--navy); border: 0; border-radius: 999px; font-size: 1rem; font-weight: 700; padding: .5em 1em; cursor: pointer; }
+dialog.zoom .zoom__tip { position: fixed; top: 1rem; left: 1rem; color: #fff; font-size: .8rem; }
 .prose h2:first-child { margin-top: 0; }
 .prose { max-width: 800px; }
 .tag { display: inline-block; font-size: .75rem; padding: .1em .6em; border-radius: 4px; background: var(--note-bg); color: var(--navy); margin-right: .3em; }

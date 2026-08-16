@@ -10,7 +10,8 @@ export const site = {
   tel: '090-7690-7557',
   registrationNo: '19200212',
   invoiceNo: 'T9810538173507',
-  hours: '平日 9:00〜18:00・メールフォームは24時間受付',
+  hours: '受付 平日 9:00〜18:00 ／ メールフォームは24時間受付',
+  hoursParts: ['受付 平日 9:00〜18:00', 'メールフォームは24時間受付'],
   personalBlog: 'https://kazutcha.com',
 };
 

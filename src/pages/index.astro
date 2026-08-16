@@ -144,7 +144,8 @@ const works = allWorks.slice(0, 3);
         <h2>ご相談・お見積のご依頼</h2>
         <p>案件の概要（自治体・所在地・現況・ご予定）をお知らせください。役所調査のうえ、お見積を提出します。</p>
         <a class="btn" href="/contact/">お問い合わせフォームへ</a>
-        <p class="small" style="margin:1rem 0 0;color:#dfe6ef">TEL {site.tel}（{site.hours}）</p>
+        <p class="cta__tel"><a href={`tel:${site.tel.replace(/-/g, '')}`}>TEL {site.tel}</a></p>
+        <p class="cta__hours">{site.hoursParts.map((h) => <span class="nowrap">{h}</span>)}</p>
       </div>
     </div>
   </section>

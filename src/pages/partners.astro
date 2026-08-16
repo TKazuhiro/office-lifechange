@@ -60,7 +60,8 @@ import { site } from '../data/site';
       <h2>連携のご相談</h2>
       <p>まずは案件の概要をお送りください。目安の幅と進め方をご返信します。</p>
       <a class="btn" href="/contact/">お問い合わせフォームへ</a>
-      <p class="small" style="margin:1rem 0 0;color:#dfe6ef">TEL {site.tel}（{site.hours}）</p>
+      <p class="cta__tel"><a href={`tel:${site.tel.replace(/-/g, '')}`}>TEL {site.tel}</a></p>
+      <p class="cta__hours">{site.hoursParts.map((h) => <span class="nowrap">{h}</span>)}</p>
     </div>
   </div>
 </Base>

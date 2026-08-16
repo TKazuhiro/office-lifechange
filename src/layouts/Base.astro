@@ -16,6 +16,7 @@ const current = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -78,7 +79,8 @@ const current = Astro.url.pathname;
           <p class="small">
             {site.postal} {site.address}<br />
             行政書士 {site.representative}<br />
-            TEL {site.tel}（{site.hours}）<br />
+            TEL <a href={`tel:${site.tel.replace(/-/g, '')}`}>{site.tel}</a><br />
+            {site.hours}<br />
             適格請求書発行事業者登録番号 {site.invoiceNo}
           </p>
         </div>
@@ -90,6 +92,12 @@ const current = Astro.url.pathname;
       <p class="copyright">© {new Date().getFullYear()} {site.name}</p>
     </footer>
 
+    <dialog class="zoom" id="zoomDialog" aria-label="図解の拡大表示">
+      <span class="zoom__tip">ピンチ／スクロールで拡大・移動できます</span>
+      <button class="zoom__close" type="button" data-close>閉じる ✕</button>
+      <div class="zoom__scroll" data-body></div>
+    </dialog>
+
     <script>
       const btn = document.querySelector('.menu-btn');
       const nav = document.getElementById('gnav');
@@ -97,6 +105,24 @@ const current = Astro.url.pathname;
         const open = nav?.classList.toggle('is-open');
         btn.setAttribute('aria-expanded', String(!!open));
       });
+
+      // 図解のクリック拡大
+      const dlg = document.getElementById('zoomDialog') as HTMLDialogElement | null;
+      const body = dlg?.querySelector('[data-body]');
+      document.querySelectorAll('figure[data-zoom] svg').forEach((svg) => {
+        svg.setAttribute('role', 'button');
+        svg.setAttribute('tabindex', '0');
+        const open = () => {
+          if (!dlg || !body) return;
+          body.innerHTML = '';
+          body.appendChild(svg.cloneNode(true));
+          dlg.showModal();
+        };
+        svg.addEventListener('click', open);
+        svg.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') { e.preventDefault(); open(); } });
+      });
+      dlg?.querySelector('[data-close]')?.addEventListener('click', () => dlg.close());
+      dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
     </script>
   </body>
 </html>
