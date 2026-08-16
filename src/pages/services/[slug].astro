@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Flow from '../../components/Flow.astro';
 import DrainageMap from '../../components/DrainageMap.astro';
 import ZoneMap from '../../components/ZoneMap.astro';
+import MoridoMap from '../../components/MoridoMap.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -43,6 +44,12 @@ const d = entry.data;
       <section class="diagram">
         <h2>図解: 排水先で変わる付随手続</h2>
         <DrainageMap />
+      </section>
+    )}
+    {d.diagram === 'morido' && (
+      <section class="diagram">
+        <h2>図解: 盛土規制法の対象になる規模の目安</h2>
+        <MoridoMap />
       </section>
     )}
     {d.diagram === 'zone' && (

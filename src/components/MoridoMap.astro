@@ -1,0 +1,112 @@
+---
+/** 盛土規制法: 許可・届出が必要になる規模の目安（土地の形質変更＋土石の堆積） */
+---
+<figure class="morido">
+  <svg viewBox="0 0 900 640" role="img" aria-labelledby="mo-title mo-desc" xmlns="http://www.w3.org/2000/svg">
+    <title id="mo-title">盛土規制法で許可・届出が必要になる規模の目安</title>
+    <desc id="mo-desc">宅地造成等工事規制区域では、盛土で高さ1mを超える崖、切土で高さ2mを超える崖、盛土と切土を同時に行い高さ2mを超える崖、崖を生じなくても高さ2mを超える盛土、面積500平方メートルを超える盛土・切土のいずれかで許可が必要。特定盛土等規制区域では同じ規模で届出、より大きな規模（盛土で崖2m超、切土で崖5m超、同時で5m超、盛土5m超、面積3000平方メートル超）で許可が必要。土石の堆積は、規制区域で高さ2m超または面積500平方メートル超で許可、特定盛土等規制区域では高さ5m超かつ面積1500平方メートル超、または面積3000平方メートル超で許可。</desc>
+
+    <text x="24" y="30" font-size="16" font-weight="800" fill="#162a45">まず「どちらの区域か」を確認する</text>
+    <!-- 区域2つ -->
+    <rect x="24" y="44" width="412" height="64" rx="10" fill="#e9eff6" stroke="#1f3a5f" stroke-width="2"/>
+    <text x="230" y="70" font-size="15" font-weight="800" fill="#162a45" text-anchor="middle">宅地造成等工事規制区域</text>
+    <text x="230" y="92" font-size="12.5" fill="#5f6770" text-anchor="middle">市街地・集落など人家に近い区域 ＝ 下の規模で「許可」</text>
+    <rect x="464" y="44" width="412" height="64" rx="10" fill="#f1f6ea" stroke="#1f3a5f" stroke-width="2"/>
+    <text x="670" y="70" font-size="15" font-weight="800" fill="#162a45" text-anchor="middle">特定盛土等規制区域</text>
+    <text x="670" y="92" font-size="12.5" fill="#5f6770" text-anchor="middle">崩落が人家に及びうる区域 ＝ 「届出」と「許可」の2段階</text>
+
+    <text x="24" y="146" font-size="16" font-weight="800" fill="#162a45">土地の形質変更（盛土・切土）— いずれか1つでも当てはまれば対象</text>
+
+    <!-- 表ヘッダ -->
+    <g font-size="12.5" font-weight="700" fill="#162a45" text-anchor="middle">
+      <rect x="24" y="160" width="300" height="34" fill="#f4f1e8"/>
+      <text x="174" y="182">行為の種類</text>
+      <rect x="326" y="160" width="180" height="34" fill="#e9eff6"/>
+      <text x="416" y="176">規制区域</text><text x="416" y="190" font-weight="400">許可が必要</text>
+      <rect x="508" y="160" width="180" height="34" fill="#f1f6ea"/>
+      <text x="598" y="176">特定盛土等規制区域</text><text x="598" y="190" font-weight="400">届出が必要</text>
+      <rect x="690" y="160" width="186" height="34" fill="#f1f6ea"/>
+      <text x="783" y="176">特定盛土等規制区域</text><text x="783" y="190" font-weight="400">許可が必要</text>
+    </g>
+
+    <!-- 行1 盛土で崖 -->
+    <g font-size="13">
+      <rect x="24" y="196" width="852" height="60" fill="#fff" stroke="#e3e0d8"/>
+      <polygon points="40,244 40,214 90,214 118,244" fill="#d9c9a3" stroke="#8a6d1c"/>
+      <line x1="90" y1="214" x2="118" y2="244" stroke="#b04a3a" stroke-width="3"/>
+      <text x="132" y="222" font-weight="700" fill="#162a45">盛土をして崖ができる</text>
+      <text x="132" y="240" fill="#5f6770">（崖 ＝ 30度を超える斜面）</text>
+      <text x="416" y="231" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 1m 超</text>
+      <text x="598" y="231" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 1m 超</text>
+      <text x="783" y="231" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 2m 超</text>
+    </g>
+    <!-- 行2 切土で崖 -->
+    <g font-size="13">
+      <rect x="24" y="258" width="852" height="60" fill="#fbfaf7" stroke="#e3e0d8"/>
+      <polygon points="40,306 40,276 70,276 98,306" fill="#e8e2d3" stroke="#8a6d1c"/>
+      <polygon points="70,276 118,276 118,306 98,306" fill="#fff" stroke="#8a6d1c" stroke-dasharray="3 3"/>
+      <line x1="70" y1="276" x2="98" y2="306" stroke="#b04a3a" stroke-width="3"/>
+      <text x="132" y="284" font-weight="700" fill="#162a45">切土をして崖ができる</text>
+      <text x="132" y="302" fill="#5f6770">（地山を削る）</text>
+      <text x="416" y="293" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 2m 超</text>
+      <text x="598" y="293" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 2m 超</text>
+      <text x="783" y="293" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 5m 超</text>
+    </g>
+    <!-- 行3 盛土+切土 -->
+    <g font-size="13">
+      <rect x="24" y="320" width="852" height="60" fill="#fff" stroke="#e3e0d8"/>
+      <polygon points="40,368 40,348 70,348 70,338 100,338 118,368" fill="#d9c9a3" stroke="#8a6d1c"/>
+      <line x1="100" y1="338" x2="118" y2="368" stroke="#b04a3a" stroke-width="3"/>
+      <text x="132" y="346" font-weight="700" fill="#162a45">盛土と切土を同時に行い崖ができる</text>
+      <text x="132" y="364" fill="#5f6770">（合わせた高さで判定）</text>
+      <text x="416" y="355" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 2m 超</text>
+      <text x="598" y="355" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 2m 超</text>
+      <text x="783" y="355" text-anchor="middle" font-weight="700" fill="#1f3a5f">崖の高さ 5m 超</text>
+    </g>
+    <!-- 行4 崖なし盛土 -->
+    <g font-size="13">
+      <rect x="24" y="382" width="852" height="60" fill="#fbfaf7" stroke="#e3e0d8"/>
+      <polygon points="40,430 52,404 106,404 118,430" fill="#d9c9a3" stroke="#8a6d1c"/>
+      <line x1="40" y1="430" x2="118" y2="430" stroke="#8a6d1c"/>
+      <text x="132" y="408" font-weight="700" fill="#162a45">崖はできないが、盛土の高さがある</text>
+      <text x="132" y="426" fill="#5f6770">（緩い勾配で盛る場合）</text>
+      <text x="416" y="417" text-anchor="middle" font-weight="700" fill="#1f3a5f">盛土の高さ 2m 超</text>
+      <text x="598" y="417" text-anchor="middle" font-weight="700" fill="#1f3a5f">盛土の高さ 2m 超</text>
+      <text x="783" y="417" text-anchor="middle" font-weight="700" fill="#1f3a5f">盛土の高さ 5m 超</text>
+    </g>
+    <!-- 行5 面積 -->
+    <g font-size="13">
+      <rect x="24" y="444" width="852" height="60" fill="#fff" stroke="#e3e0d8"/>
+      <rect x="44" y="458" width="70" height="34" fill="#efe9d8" stroke="#8a6d1c" stroke-dasharray="4 3"/>
+      <text x="79" y="480" font-size="11" fill="#8a6d1c" text-anchor="middle">面積</text>
+      <text x="132" y="470" font-weight="700" fill="#162a45">上のどれにも当たらないが、面積が大きい</text>
+      <text x="132" y="488" fill="#5f6770">（薄く広く盛る・削る）</text>
+      <text x="416" y="479" text-anchor="middle" font-weight="700" fill="#1f3a5f">500㎡ 超</text>
+      <text x="598" y="479" text-anchor="middle" font-weight="700" fill="#1f3a5f">500㎡ 超</text>
+      <text x="783" y="479" text-anchor="middle" font-weight="700" fill="#1f3a5f">3,000㎡ 超</text>
+    </g>
+
+    <text x="24" y="540" font-size="16" font-weight="800" fill="#162a45">土石の堆積（資材置場・仮置きなど、あとで撤去するもの）</text>
+    <g font-size="13">
+      <rect x="24" y="552" width="852" height="60" fill="#fff" stroke="#e3e0d8"/>
+      <polygon points="44,600 60,570 100,570 116,600" fill="#c9c2b3" stroke="#6b6357"/>
+      <text x="132" y="578" font-weight="700" fill="#162a45">土石を一時的に堆積する</text>
+      <text x="132" y="596" fill="#5f6770">（高さ または 面積で判定）</text>
+      <text x="416" y="577" text-anchor="middle" font-weight="700" fill="#1f3a5f">高さ 2m 超</text>
+      <text x="416" y="595" text-anchor="middle" fill="#1f3a5f">または 面積 500㎡ 超</text>
+      <text x="598" y="577" text-anchor="middle" font-weight="700" fill="#1f3a5f">高さ 2m 超</text>
+      <text x="598" y="595" text-anchor="middle" fill="#1f3a5f">または 面積 500㎡ 超</text>
+      <text x="783" y="577" text-anchor="middle" font-weight="700" fill="#1f3a5f">高さ 5m 超 かつ 1,500㎡ 超</text>
+      <text x="783" y="595" text-anchor="middle" fill="#1f3a5f">または 面積 3,000㎡ 超</text>
+    </g>
+
+    <text x="24" y="632" font-size="12.5" fill="#5f6770">※ 政令の基準の要約です。区域の指定範囲は都道府県ごとに異なり、適用除外もあります。個別の判断は役所調査で確定します</text>
+  </svg>
+  <figcaption>盛土規制法の対象になる規模の目安（土地の形質変更・土石の堆積）。まず区域を確認し、5つの行為のどれかに当てはまるかを見ます</figcaption>
+</figure>
+
+<style>
+  .morido { margin: 1.5rem 0 2rem; }
+  .morido svg { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+  .morido figcaption { font-size: .82rem; color: var(--muted); margin-top: .5em; }
+</style>
