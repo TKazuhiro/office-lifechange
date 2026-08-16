@@ -24,6 +24,13 @@ const d = entry.data;
       <p class="lead">{d.short}</p>
     </div>
 
+    {d.image && (
+      <figure class="keyvisual">
+        <img src={d.image} alt={d.imageAlt ?? ''} width="1600" height="893" loading="eager" fetchpriority="high" />
+        <figcaption class="small">{d.imageAlt?.replace('（イメージ）', '')}のイメージ（画像はAI生成）</figcaption>
+      </figure>
+    )}
+
     <dl class="meta">
       <div><dt>所要期間の目安</dt><dd>{d.period}</dd></div>
       <div><dt>料金の考え方</dt><dd>{d.fee}</dd></div>
@@ -73,6 +80,9 @@ const d = entry.data;
 </Base>
 
 <style>
+  .keyvisual { margin: 0 0 1.5rem; }
+  .keyvisual img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); display: block; }
+  .keyvisual figcaption { margin-top: .4rem; color: var(--muted); }
   .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; margin: 0 0 2rem; }
   .meta dt { font-size: .8rem; color: var(--muted); }
   .meta dd { margin: 0; font-weight: 600; }

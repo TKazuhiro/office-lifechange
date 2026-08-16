@@ -12,6 +12,8 @@ const services = defineCollection({
     fee: z.string(), // 料金の考え方（金額は書かない）
     steps: z.array(z.object({ title: z.string(), note: z.string().optional() })).default([]), // 手続の流れ図
     diagram: z.enum(['drainage', 'zone', 'morido']).optional(), // 本文の後に出す図解
+    image: z.string().optional(), // ページ上部のイメージ画像（/images/services/*.jpg。AI生成はキャプションに明記）
+    imageAlt: z.string().optional(),
     summary: z.string(), // meta description
   }),
 });
