@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import { areas } from '../data/site';
+---
+<Base title="対応エリア" description="Life行政書士事務所の対応エリア。岐阜県全域、愛知県（名古屋市・一宮市・稲沢市ほか）、三重県（桑名市・四日市市・鈴鹿市・松阪市ほか）で許認可申請を承ります。">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> › 対応エリア</p>
+    <div class="page-head">
+      <h1>対応エリア</h1>
+      <p class="lead">
+        事務所（岐阜県揖斐郡池田町）を拠点に、岐阜県・愛知県・三重県の下記地域で許認可申請を承っています。
+        窓口での協議・現地確認を伴う業務のため、下記を主な対応エリアとしていますが、隣接する地域もご相談ください。
+      </p>
+    </div>
+
+    <div class="prefs">
+      {areas.map((a) => (
+        <section class="pref">
+          <h2>{a.pref}</h2>
+          {a.note ? (
+            <p class="pref__note">{a.note}</p>
+          ) : (
+            <ul class="cities">
+              {a.cities.map((c) => <li>{c}</li>)}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
+
+    <div class="note">
+      <strong>自治体ごとの運用について</strong>: 開発許可・建築許可の基準や、盛土規制法・農地法の窓口運用は自治体ごとに異なります。
+      当事務所では調査で得た内容を自治体別に記録し、次の案件に活かしています。上記以外の自治体でも、調査から対応します。
+    </div>
+
+    <div class="cta">
+      <h2>エリア内の案件のご相談</h2>
+      <p>自治体名と所在地をお知らせいただければ、対応可否と進め方をご案内します。</p>
+      <a class="btn" href="/contact/">お問い合わせフォームへ</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .prefs { display: grid; gap: 1.5rem; margin-top: 1rem; }
+  .pref { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem 1.5rem; }
+  .pref h2 { margin-top: 0; }
+  .pref__note { font-size: 1.05rem; font-weight: 600; margin: 0; }
+  .cities { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+  .cities li { background: var(--note-bg); border-radius: 6px; padding: .25em .8em; margin: 0; font-size: .95rem; }
+</style>

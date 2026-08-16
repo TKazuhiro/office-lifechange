@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { site, areas } from '../data/site';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 5);
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">岐阜県・愛知県・三重県</p>
+      <h1>都市計画法・盛土規制法・農地法の<br class="pc" />許認可申請を専門とする行政書士事務所です</h1>
+      <p class="lead">
+        市街化調整区域での建築許可（43条）、開発許可（29条）、盛土規制法、農地転用、河川・道路・水路の占用など、
+        土地に関する許認可の調査・書類作成・官公署との折衝を承ります。
+      </p>
+      <div class="hero__actions">
+        <a class="btn" href="/services/">業務一覧を見る</a>
+        <a class="btn btn--ghost" href="/contact/">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>取扱業務</h2>
+      <div class="grid grid--3">
+        {services.map((s) => (
+          <a class="card" href={`/services/${s.id}/`}>
+            <span class="tag">{s.data.law}</span>
+            <h3>{s.data.title}</h3>
+            <p class="small">{s.data.short}</p>
+            <span class="more">詳しく見る →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <h2>この事務所の進め方</h2>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3>1. 調べてから、金額を出す</h3>
+          <p class="small">
+            許認可の要否と付随する手続は、区域・排水先・農地かどうかで大きく変わります。
+            役所調査を済ませてから正式なお見積を提出します。調査前は目安の幅でお伝えし、単一の金額を先に出しません。
+          </p>
+        </div>
+        <div class="card">
+          <h3>2. 自治体ごとの運用を前提に動く</h3>
+          <p class="small">
+            同じ法律でも、条例名・区域指定・窓口の運用は自治体ごとに違います。
+            調査で得た知見は自治体別に記録し、次の案件の調査時間を短くしています。
+          </p>
+        </div>
+        <div class="card">
+          <h3>3. 記録が残る事務所</h3>
+          <p class="small">
+            調査結果・協議の経過・図面と申請書の数値の突合は、AIを組み込んだ事務所の仕組みで記録しています。
+            進捗の共有と、後からの確認ができる形で進めます。
+          </p>
+        </div>
+      </div>
+      <p class="small" style="margin-top:1rem">
+        士業・設計事務所・不動産業者の方との連携の進め方は <a href="/partners/">士業・事業者の方へ</a> をご覧ください。
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>対応エリア</h2>
+      <div class="grid grid--3">
+        {areas.map((a) => (
+          <div class="card">
+            <h3>{a.pref}</h3>
+            {a.note ? <p>{a.note}</p> : <p class="small">{a.cities.join('・')}</p>}
+          </div>
+        ))}
+      </div>
+      <p class="small" style="margin-top:.8rem">
+        上記以外の地域もご相談ください。詳細は <a href="/area/">対応エリア</a> へ。
+      </p>
+    </div>
+  </section>
+
+  {news.length > 0 && (
+    <section class="section section--alt">
+      <div class="wrap">
+        <h2>お知らせ</h2>
+        <ul class="news">
+          {news.map((n) => (
+            <li><time datetime={n.data.date.toISOString()}>{n.data.date.toLocaleDateString('ja-JP')}</time><span>{n.data.title}</span></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta">
+        <h2>ご相談・お見積のご依頼</h2>
+        <p>案件の概要（自治体・所在地・現況・ご予定）をお知らせください。役所調査のうえ、お見積を提出します。</p>
+        <a class="btn" href="/contact/">お問い合わせフォームへ</a>
+        <p class="small" style="margin:1rem 0 0;color:#dfe6ef">TEL {site.tel}（{site.hours}）</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%); padding: 3.5rem 0 3rem; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: 1.9rem; }
+  .hero .lead { max-width: 760px; }
+  .hero__actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.4rem; }
+  .news { list-style: none; padding: 0; margin: 0; }
+  .news li { display: flex; gap: 1.2rem; padding: .6em 0; border-bottom: 1px solid var(--line); }
+  .news time { color: var(--muted); font-size: .9rem; white-space: nowrap; }
+  @media (max-width: 640px) { .pc { display: none; } .hero h1 { font-size: 1.45rem; } }
+</style>

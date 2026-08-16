@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://office-lifechange.com/sitemap-index.xml

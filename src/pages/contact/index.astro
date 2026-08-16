@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+---
+<Base title="お問い合わせ" description="Life行政書士事務所へのお問い合わせ・お見積のご依頼。案件の概要（自治体・所在地・現況・ご予定）をお知らせください。役所調査のうえお見積を提出します。">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> › お問い合わせ</p>
+    <div class="page-head">
+      <h1>お問い合わせ</h1>
+      <p class="lead">
+        ご相談・お見積のご依頼は下記フォームからお送りください。分かる範囲で結構です。
+        内容を確認のうえ、原則として2営業日以内にご返信します。初回のご相談は無料です。
+      </p>
+    </div>
+
+    <div class="grid grid--2 contact">
+      <form class="form" method="post" action="/api/contact">
+        <label>お名前 <span class="req">必須</span>
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+        <label>会社名・事務所名
+          <input type="text" name="company" autocomplete="organization" />
+        </label>
+        <label>メールアドレス <span class="req">必須</span>
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <label>電話番号
+          <input type="tel" name="tel" autocomplete="tel" />
+        </label>
+        <label>ご相談の種類
+          <select name="type">
+            <option value="見積のご依頼">お見積のご依頼</option>
+            <option value="ご相談">ご相談（進め方・可否の確認）</option>
+            <option value="役所調査のみ">役所調査のみのご依頼</option>
+            <option value="その他">その他</option>
+          </select>
+        </label>
+        <label>自治体・所在地（地番まで分かれば）
+          <input type="text" name="place" placeholder="例: 岐阜県揖斐郡池田町○○ 123番" />
+        </label>
+        <label>現況・地目
+          <input type="text" name="status" placeholder="例: 農地（田）／宅地／雑種地、市街化調整区域" />
+        </label>
+        <label>希望時期
+          <input type="text" name="timing" placeholder="例: 年内に着工したい" />
+        </label>
+        <label>ご相談内容 <span class="req">必須</span>
+          <textarea name="message" rows="7" required placeholder="建築・造成のご予定、お手元の資料（登記事項証明書・公図・測量図など）の有無、その他ご質問"></textarea>
+        </label>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey}></div>}
+        <p class="small">送信いただいた情報は、お問い合わせへの対応以外の目的には使用しません（<a href="/privacy/">プライバシーポリシー</a>）。</p>
+        <button class="btn" type="submit">送信する</button>
+      </form>
+
+      <aside>
+        <div class="card">
+          <h3>お電話でのご相談</h3>
+          <p><a class="tel" href={`tel:${site.tel.replace(/-/g, '')}`}>{site.tel}</a></p>
+          <p class="small">{site.hours}<br />窓口・現地に出ていることが多いため、つながらない場合はフォームをご利用ください。</p>
+        </div>
+        <div class="card" style="margin-top:1rem">
+          <h3>お知らせいただけると早い情報</h3>
+          <ul class="small">
+            <li>自治体名・所在地（地番）</li>
+            <li>現況（宅地／農地・現況測量の有無）</li>
+            <li>建築・造成の予定（自己用住宅／事業用など）</li>
+            <li>雨水排水の放流先（分かれば）</li>
+            <li>希望時期・期限</li>
+          </ul>
+          <p class="small">お手元の登記事項証明書・公図・測量図があれば、返信後にお送りください。</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+  {turnstileKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+</Base>
+
+<style>
+  .contact { align-items: start; margin-top: 1rem; }
+  .form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; display: grid; gap: 1rem; }
+  .form label { display: grid; gap: .3em; font-weight: 600; font-size: .95rem; }
+  .form input, .form select, .form textarea { font: inherit; padding: .6em .8em; border: 1px solid #cfcac0; border-radius: 6px; background: #fff; width: 100%; }
+  .form textarea { resize: vertical; }
+  .req { font-size: .7rem; color: #fff; background: #b04a3a; border-radius: 4px; padding: .1em .5em; margin-left: .3em; vertical-align: middle; }
+  .hp { position: absolute; left: -9999px; }
+  .tel { font-size: 1.4rem; font-weight: 800; text-decoration: none; }
+</style>

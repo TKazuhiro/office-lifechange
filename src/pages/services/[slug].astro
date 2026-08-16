@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((s) => ({ params: { slug: s.id }, props: { entry: s } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<Base title={d.title} description={d.summary}>
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> › <a href="/services/">業務一覧</a> › {d.title}</p>
+    <div class="page-head">
+      <span class="tag">{d.law}</span>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.short}</p>
+    </div>
+
+    <dl class="meta">
+      <div><dt>所要期間の目安</dt><dd>{d.period}</dd></div>
+      <div><dt>料金の目安</dt><dd>{d.fee}</dd></div>
+    </dl>
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <div class="note">
+      <strong>ご注意</strong>: 各制度の運用（必要書類・審査期間・手数料・立地基準の当てはめ）は<strong>自治体によって異なります</strong>。
+      このページの内容は一般的な流れと当事務所の実績に基づく目安であり、個別の案件については役所調査のうえでご案内します。
+    </div>
+
+    <div class="cta">
+      <h2>この手続についてのご相談</h2>
+      <p>自治体名・所在地・現況・ご予定をお知らせください。役所調査のうえ、お見積を提出します。</p>
+      <a class="btn" href="/contact/">お問い合わせフォームへ</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; margin: 0 0 2rem; }
+  .meta dt { font-size: .8rem; color: var(--muted); }
+  .meta dd { margin: 0; font-weight: 600; }
+</style>

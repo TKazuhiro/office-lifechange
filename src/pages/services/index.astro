@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="業務一覧" description="Life行政書士事務所の取扱業務。開発許可（29条）・建築許可（43条）・60条証明・盛土規制法・農地転用・河川法・道路水路の占用許可。所要期間と料金の目安を掲載しています。">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> › 業務一覧</p>
+    <div class="page-head">
+      <h1>業務一覧</h1>
+      <p class="lead">土地に関する許認可申請を専門としています。所要期間・料金は目安です。自治体によって運用が異なるため、正式なお見積は役所調査のうえで提出します。</p>
+    </div>
+
+    <div class="list">
+      {services.map((s) => (
+        <a class="card svc" href={`/services/${s.id}/`}>
+          <div class="svc__head">
+            <span class="tag">{s.data.law}</span>
+            <h2>{s.data.title}</h2>
+            <p>{s.data.short}</p>
+          </div>
+          <dl class="svc__meta">
+            <div><dt>所要期間の目安</dt><dd>{s.data.period}</dd></div>
+            <div><dt>料金の目安</dt><dd>{s.data.fee}</dd></div>
+          </dl>
+          <span class="more">詳しく見る →</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="note">
+      <strong>上記以外の手続</strong>についてもご相談ください。埋蔵文化財の工事届出、砂防指定地内の行為許可、雨水浸透阻害行為許可、各種条例に基づく届出など、土地の許認可に付随する手続を承っています。
+    </div>
+
+    <div class="cta">
+      <h2>ご相談・お見積のご依頼</h2>
+      <p>案件の概要をお知らせください。役所調査のうえ、お見積を提出します。</p>
+      <a class="btn" href="/contact/">お問い合わせフォームへ</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .list { display: grid; gap: 1.2rem; margin-top: 1.5rem; }
+  .svc h2 { border: 0; padding: 0; margin: .2em 0 .3em; font-size: 1.25rem; }
+  .svc p { margin-bottom: .6em; }
+  .svc__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .6rem 1.5rem; margin: .8em 0; padding-top: .8em; border-top: 1px dashed var(--line); }
+  .svc__meta dt { font-size: .8rem; color: var(--muted); }
+  .svc__meta dd { margin: 0; font-size: .95rem; }
+</style>

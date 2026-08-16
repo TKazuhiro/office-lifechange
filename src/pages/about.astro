@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="事務所について" description="Life行政書士事務所（岐阜県揖斐郡池田町）の概要。代表 髙橋一浩は地方公共団体で15年、土木・上下水設計・施工管理に携わったのち独立。土地の許認可申請を専門としています。">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> › 事務所について</p>
+    <div class="page-head">
+      <h1>事務所について</h1>
+      <p class="lead">お客様のご要望に最大限配慮し、迅速に業務を進めることを基本方針として、土地に関する許認可に特化した事務所です。</p>
+    </div>
+
+    <article class="prose">
+      <h2>代表</h2>
+      <p><strong>行政書士 {site.representative}</strong></p>
+      <p>
+        地方公共団体で15年間、土木・上下水道の設計と施工管理の実務に携わったのち独立し、Life行政書士事務所を設立しました。
+        行政側で図面と申請を受ける立場にいた経験を活かし、開発許可・建築許可・盛土規制法など、設計と申請の両方が分かる立場で許認可を進めています。
+      </p>
+      <ul>
+        <li>行政書士（岐阜県行政書士会所属）{site.registrationNo ? `／登録番号 ${site.registrationNo}` : ''}</li>
+        <li>2級土木施工管理技士 ほか</li>
+      </ul>
+
+      <h2>事務所の進め方</h2>
+      <ul>
+        <li><strong>調べてから、金額を出す</strong> — 許認可の要否は区域・排水先・農地かどうかで大きく変わります。役所調査のうえで正式なお見積を提出します</li>
+        <li><strong>自治体ごとの運用を前提に動く</strong> — 調査で得た知見を自治体別に記録し、次の案件の調査時間を短くしています</li>
+        <li><strong>記録が残る事務所</strong> — 調査・協議・図面と申請書の数値の突合を、AIを組み込んだ事務所の仕組みで記録しています。判断は行政書士が行い、AIは調査の下ごしらえと数値の確認を担当します</li>
+      </ul>
+      <p class="small">
+        事務所の仕組みづくりについては、代表の個人ブログ <a href={site.personalBlog} target="_blank" rel="noopener">kazutcha.com</a> で記録しています。
+      </p>
+
+      <h2>事務所概要</h2>
+      <table>
+        <tbody>
+          <tr><th>名称</th><td>{site.name}</td></tr>
+          <tr><th>代表</th><td>行政書士 {site.representative}</td></tr>
+          <tr><th>所在地</th><td>{site.postal} {site.address}</td></tr>
+          <tr><th>電話</th><td>{site.tel}</td></tr>
+          <tr><th>受付</th><td>{site.hours}</td></tr>
+          <tr><th>取扱業務</th><td>都市計画法（開発許可・建築許可・60条証明）、盛土規制法、農地法、河川法、道路・水路の占用許可、埋蔵文化財工事届出 ほか土地に関する許認可</td></tr>
+          <tr><th>対応エリア</th><td>岐阜県全域、愛知県・三重県の一部（<a href="/area/">対応エリア</a>）</td></tr>
+          <tr><th>適格請求書発行事業者登録番号</th><td>{site.invoiceNo}</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <div class="cta">
+      <h2>ご相談・お見積のご依頼</h2>
+      <a class="btn" href="/contact/">お問い合わせフォームへ</a>
+    </div>
+  </div>
+</Base>
