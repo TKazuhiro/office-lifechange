@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Flow from '../../components/Flow.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -22,8 +23,15 @@ const d = entry.data;
 
     <dl class="meta">
       <div><dt>所要期間の目安</dt><dd>{d.period}</dd></div>
-      <div><dt>料金の目安</dt><dd>{d.fee}</dd></div>
+      <div><dt>料金の考え方</dt><dd>{d.fee}</dd></div>
     </dl>
+
+    {d.steps.length > 0 && (
+      <section class="flowbox">
+        <h2 class="flowbox__h">手続の流れ</h2>
+        <Flow steps={d.steps} />
+      </section>
+    )}
 
     <article class="prose">
       <Content />
@@ -46,4 +54,6 @@ const d = entry.data;
   .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; margin: 0 0 2rem; }
   .meta dt { font-size: .8rem; color: var(--muted); }
   .meta dd { margin: 0; font-weight: 600; }
+  .flowbox { margin: 0 0 2rem; }
+  .flowbox__h { margin-top: 0; }
 </style>

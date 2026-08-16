@@ -9,7 +9,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
     <p class="breadcrumb"><a href="/">ホーム</a> › 業務一覧</p>
     <div class="page-head">
       <h1>業務一覧</h1>
-      <p class="lead">土地に関する許認可申請を専門としています。所要期間・料金は目安です。自治体によって運用が異なるため、正式なお見積は役所調査のうえで提出します。</p>
+      <p class="lead">土地に関する許認可申請を専門としています。所要期間は目安です。自治体によって運用が異なるため、料金は役所調査のうえで確定額をお見積します。</p>
     </div>
 
     <div class="list">
@@ -22,7 +22,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
           </div>
           <dl class="svc__meta">
             <div><dt>所要期間の目安</dt><dd>{s.data.period}</dd></div>
-            <div><dt>料金の目安</dt><dd>{s.data.fee}</dd></div>
+            <div><dt>料金の考え方</dt><dd>{s.data.fee}</dd></div>
           </dl>
           <span class="more">詳しく見る →</span>
         </a>

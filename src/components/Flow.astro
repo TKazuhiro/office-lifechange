@@ -1,0 +1,32 @@
+---
+/** 手続の流れを横並びのステップ図で表示する。モバイルでは縦並びになる。 */
+interface Props {
+  steps: { title: string; note?: string }[];
+  compact?: boolean;
+}
+const { steps, compact = false } = Astro.props;
+---
+<ol class:list={['flow', { 'flow--compact': compact }]}>
+  {steps.map((s, i) => (
+    <li class="flow__step">
+      <span class="flow__num" aria-hidden="true">{i + 1}</span>
+      <span class="flow__title">{s.title}</span>
+      {s.note && <span class="flow__note">{s.note}</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .flow { list-style: none; margin: 1.2rem 0 1.6rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .6rem; counter-reset: none; }
+  .flow__step { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem .9rem .9rem; margin: 0; display: flex; flex-direction: column; gap: .25rem; }
+  .flow__step::after { content: '›'; position: absolute; right: -.62rem; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 1.6rem; font-weight: 700; z-index: 1; }
+  .flow__step:last-child::after { content: none; }
+  .flow__num { width: 1.9em; height: 1.9em; border-radius: 50%; background: var(--navy); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; }
+  .flow__title { font-weight: 700; color: var(--navy-dark); line-height: 1.4; }
+  .flow__note { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+  .flow--compact .flow__step { padding: .7rem .8rem; }
+  @media (max-width: 640px) {
+    .flow { grid-template-columns: 1fr; }
+    .flow__step::after { content: '⌄'; right: auto; left: 1.1rem; top: auto; bottom: -1.05rem; transform: none; }
+  }
+</style>

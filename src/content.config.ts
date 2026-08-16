@@ -9,7 +9,8 @@ const services = defineCollection({
     law: z.string(), // 根拠法令
     order: z.number(),
     period: z.string(), // 所要期間の目安
-    fee: z.string(), // 料金の目安（レンジ）
+    fee: z.string(), // 料金の考え方（金額は書かない）
+    steps: z.array(z.object({ title: z.string(), note: z.string().optional() })).default([]), // 手続の流れ図
     summary: z.string(), // meta description
   }),
 });

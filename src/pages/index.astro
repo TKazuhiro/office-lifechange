@@ -1,14 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
+import Flow from '../components/Flow.astro';
 import { getCollection } from 'astro:content';
 import { site, areas } from '../data/site';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 5);
+
+const flow = [
+  { title: 'お問い合わせ', note: '自治体・所在地・現況・ご予定をお知らせください' },
+  { title: '役所調査', note: '区域・立地基準・排水先・関係法令を確認' },
+  { title: 'お見積', note: '調査結果をもとに必要な手続を確定して提示' },
+  { title: '受任・書類作成', note: '申請書・図面・同意書類の整備、地元協議' },
+  { title: '申請・折衝', note: '官公署との協議、補正への対応' },
+  { title: '許可', note: '完了検査等が必要な場合はその対応まで' },
+];
+
+const works = [
+  { src: '/images/godo_kansei.jpg', alt: '造成完了後の宅地', cap: '岐阜県安八郡神戸町｜造成完了' },
+  { src: '/images/tarui_kansei.jpg', alt: '造成完了後の宅地', cap: '岐阜県不破郡垂井町｜造成完了' },
+  { src: '/images/kasugai_sabou_kansei.jpg', alt: '砂防指定地内の造成完了', cap: '愛知県春日井市｜砂防指定地内の造成完了' },
+  { src: '/images/ogaki_kansei.jpg', alt: '造成完了後の道路と宅地', cap: '岐阜県大垣市｜造成完了' },
+  { src: '/images/ikeda_zousei.jpg', alt: '造成工事中の現場', cap: '岐阜県揖斐郡池田町｜造成中' },
+];
 ---
 <Base>
   <section class="hero">
-    <div class="wrap">
+    <div class="hero__bg" style="background-image:url('/images/den.jpg')"></div>
+    <div class="wrap hero__in">
       <p class="eyebrow">岐阜県・愛知県・三重県</p>
       <h1>都市計画法・盛土規制法・農地法の<br class="pc" />許認可申請を専門とする行政書士事務所です</h1>
       <p class="lead">
@@ -40,7 +59,15 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() 
 
   <section class="section section--alt">
     <div class="wrap">
-      <h2>この事務所の進め方</h2>
+      <h2>ご依頼から許可までの流れ</h2>
+      <p class="lead">許認可の要否は、区域・排水先・農地かどうかで大きく変わります。まず調べて、必要な手続を確定してからお見積を提示します。</p>
+      <Flow steps={flow} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>当事務所の進め方</h2>
       <div class="grid grid--3">
         <div class="card">
           <h3>1. 調べてから、金額を出す</h3>
@@ -53,20 +80,35 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() 
           <h3>2. 自治体ごとの運用を前提に動く</h3>
           <p class="small">
             同じ法律でも、条例名・区域指定・窓口の運用は自治体ごとに違います。
-            調査で得た知見は自治体別に記録し、次の案件の調査時間を短くしています。
+            調査で得た知見は自治体別に集約し、次の案件の調査時間を短くしています。
           </p>
         </div>
         <div class="card">
-          <h3>3. 記録が残る事務所</h3>
+          <h3>3. 知識を蓄積し、次に活かす</h3>
           <p class="small">
-            調査結果・協議の経過・図面と申請書の数値の突合は、AIを組み込んだ事務所の仕組みで記録しています。
-            進捗の共有と、後からの確認ができる形で進めます。
+            調査結果・協議の経過・図面と申請書の数値の突合を、AIを組み込んだ事務所の仕組みで蓄積しています。
+            案件ごとに得た知識を事務所の資産として積み上げ、次のご依頼に活かします。
           </p>
         </div>
       </div>
       <p class="small" style="margin-top:1rem">
         士業・設計事務所・不動産業者の方との連携の進め方は <a href="/partners/">士業・事業者の方へ</a> をご覧ください。
       </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <h2>これまでの現場から</h2>
+      <p class="lead">許認可を担当した造成・建築の現場です。</p>
+      <div class="works">
+        {works.map((w) => (
+          <figure class="works__item">
+            <img src={w.src} alt={w.alt} loading="lazy" width="800" height="600" />
+            <figcaption>{w.cap}</figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -113,12 +155,24 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() 
 </Base>
 
 <style>
-  .hero { background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%); padding: 3.5rem 0 3rem; border-bottom: 1px solid var(--line); }
-  .hero h1 { font-size: 1.9rem; }
-  .hero .lead { max-width: 760px; }
+  .hero { position: relative; padding: 4.5rem 0 4rem; border-bottom: 1px solid var(--line); overflow: hidden; color: #fff; }
+  .hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center 60%; }
+  .hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(22,42,69,.88) 0%, rgba(22,42,69,.72) 55%, rgba(22,42,69,.45) 100%); }
+  .hero__in { position: relative; }
+  .hero h1 { font-size: 1.9rem; color: #fff; }
+  .hero .eyebrow { color: #e7c86a; }
+  .hero .lead { max-width: 760px; color: #e6ebf2; }
   .hero__actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.4rem; }
+  .hero .btn { background: #fff; color: var(--navy); border-color: #fff; }
+  .hero .btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .hero .btn--ghost { background: transparent; color: #fff; }
+  .hero .btn--ghost:hover { background: #fff; color: var(--navy); }
+  .works { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .works__item { margin: 0; }
+  .works__item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); display: block; }
+  .works__item figcaption { font-size: .82rem; color: var(--muted); margin-top: .4em; }
   .news { list-style: none; padding: 0; margin: 0; }
   .news li { display: flex; gap: 1.2rem; padding: .6em 0; border-bottom: 1px solid var(--line); }
   .news time { color: var(--muted); font-size: .9rem; white-space: nowrap; }
-  @media (max-width: 640px) { .pc { display: none; } .hero h1 { font-size: 1.45rem; } }
+  @media (max-width: 640px) { .pc { display: none; } .hero h1 { font-size: 1.45rem; } .hero { padding: 3rem 0 2.5rem; } }
 </style>

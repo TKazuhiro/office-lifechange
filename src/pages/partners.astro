@@ -13,6 +13,10 @@ import { site } from '../data/site';
       </p>
     </div>
 
+    <figure class="photo">
+      <img src="/images/meeting.jpg" alt="打合せの様子" loading="lazy" width="1600" height="1200" />
+    </figure>
+
     <article class="prose">
       <h2>お任せいただける範囲</h2>
       <ul>
@@ -60,3 +64,8 @@ import { site } from '../data/site';
     </div>
   </div>
 </Base>
+
+<style>
+  .photo { margin: 0 0 1.5rem; }
+  .photo img { width: 100%; max-height: 360px; object-fit: cover; border-radius: var(--radius); display: block; }
+</style>

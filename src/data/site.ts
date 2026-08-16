@@ -8,7 +8,7 @@ export const site = {
   postal: '〒503-2422',
   address: '岐阜県揖斐郡池田町八幡998番地',
   tel: '090-7690-7557',
-  registrationNo: '', // 【要確認】行政書士登録番号を記載する
+  registrationNo: '19200212',
   invoiceNo: 'T9810538173507',
   hours: '平日 9:00〜18:00・メールフォームは24時間受付',
   personalBlog: 'https://kazutcha.com',

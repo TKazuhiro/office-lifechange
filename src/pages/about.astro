@@ -25,12 +25,15 @@ import { site } from '../data/site';
       <h2>事務所の進め方</h2>
       <ul>
         <li><strong>調べてから、金額を出す</strong> — 許認可の要否は区域・排水先・農地かどうかで大きく変わります。役所調査のうえで正式なお見積を提出します</li>
-        <li><strong>自治体ごとの運用を前提に動く</strong> — 調査で得た知見を自治体別に記録し、次の案件の調査時間を短くしています</li>
-        <li><strong>記録が残る事務所</strong> — 調査・協議・図面と申請書の数値の突合を、AIを組み込んだ事務所の仕組みで記録しています。判断は行政書士が行い、AIは調査の下ごしらえと数値の確認を担当します</li>
+        <li><strong>自治体ごとの運用を前提に動く</strong> — 調査で得た知見を自治体別に集約し、次の案件の調査時間を短くしています</li>
+        <li><strong>知識を蓄積し、次に活かす</strong> — 調査・協議・図面と申請書の数値の突合を、AIを組み込んだ事務所の仕組みで蓄積しています。判断は行政書士が行い、AIは調査の下ごしらえと数値の確認を担当します</li>
       </ul>
       <p class="small">
-        事務所の仕組みづくりについては、代表の個人ブログ <a href={site.personalBlog} target="_blank" rel="noopener">kazutcha.com</a> で記録しています。
+        事務所の仕組みづくりについては、代表の個人ブログ <a href={site.personalBlog} target="_blank" rel="noopener">kazutcha.com</a> で書いています。
       </p>
+      <figure class="photo">
+        <img src="/images/meeting.jpg" alt="打合せの様子" loading="lazy" width="1600" height="1200" />
+      </figure>
 
       <h2>事務所概要</h2>
       <table>
@@ -53,3 +56,8 @@ import { site } from '../data/site';
     </div>
   </div>
 </Base>
+
+<style>
+  .photo { margin: 1.5rem 0; }
+  .photo img { width: 100%; max-width: 640px; border-radius: var(--radius); display: block; }
+</style>
