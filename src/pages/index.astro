@@ -1,11 +1,10 @@
 ---
 /**
  * トップページ（2026-08-18 B案: 旧HPの骨格を継ぎ、中身は承認済みの新しい文章・画像）
- * 並び: ヒーロー（左文字・右写真・受付時間）→ NEWS一行 → SERVICE → FEATURE → FLOW → AREA → WORKS → ABOUT → NEWS → CONTACT
+ * 並び: ヒーロー（左文字＋CTA・右写真。受付時間のドット表は2026-08-18に外した＝BtoB第一の読者には効かず視線を散らすため。一行の受付案内のみ）→ NEWS一行 → SERVICE → FEATURE → FLOW → AREA → WORKS → ABOUT → NEWS → CONTACT
  */
 import Base from '../layouts/Base.astro';
 import Flow from '../components/Flow.astro';
-import Hours from '../components/Hours.astro';
 import ServiceIcon from '../components/ServiceIcon.astro';
 import { getCollection } from 'astro:content';
 import { site, areas } from '../data/site';
@@ -58,7 +57,11 @@ const features = [
           調整区域・農地・盛土など判断に迷う土地の手続を見極め、<br class="pc" />
           申請から許可までを引き受ける行政書士事務所です。
         </p>
-        <div class="hero__hours"><Hours /></div>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="/contact/">✉ お問い合わせ・お見積のご依頼</a>
+          <a class="btn" href="/services/">業務一覧を見る</a>
+        </div>
+        <p class="hero__note">{site.hoursParts.map((h) => <span class="nowrap">{h}</span>)}　<a class="tel-link tel-link--sm" href={`tel:${site.tel.replace(/-/g, '')}`}>{site.tel}</a></p>
       </div>
       <div class="hero__photo">
         <img src="/images/den.jpg" alt="田園が広がる土地の風景" width="1600" height="1066" fetchpriority="high" />
@@ -134,7 +137,7 @@ const features = [
 
   <!-- AREA -->
   <section class="section section--alt" id="area">
-    <div class="wrap area">
+    <div class="wrap">
       <div class="area__text">
         <div class="sec-head">
           <span class="sec-label">対応エリア</span>
@@ -151,7 +154,6 @@ const features = [
         </dl>
         <p class="small">自治体ごとの詳細は <a href="/area/">対応エリア</a> へ。</p>
       </div>
-      <div class="area__side"><Hours /></div>
     </div>
   </section>
 
@@ -244,7 +246,11 @@ const features = [
   .hero__title span { display: block; }
   .hero__title em { font-style: normal; color: var(--blue); }
   .hero__lead { color: var(--muted); font-size: .95rem; margin-bottom: 1.6rem; }
-  .hero__hours { max-width: 460px; }
+  .hero__actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .hero__note { font-size: .84rem; color: var(--muted); margin: 0; }
+  .hero__note .nowrap { display: inline-block; white-space: nowrap; }
+  .hero__note .nowrap + .nowrap::before { content: '／'; margin: 0 .3em; }
+  .tel-link--sm { font-size: 1rem; }
   .hero__photo { position: relative; }
   .hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
   .hero__news { display: flex; align-items: center; gap: .8rem; padding: 1.2rem 1.5rem; font-size: .88rem; border-bottom: 1px solid var(--line); margin-top: 1.5rem; }
@@ -255,11 +261,10 @@ const features = [
   @media (max-width: 900px) {
     .hero__in { grid-template-columns: 1fr; gap: 1.5rem; }
     .hero__photo { order: -1; }
-    .hero__hours { max-width: none; }
     .hero__eyebrow { margin-top: 0; }
   }
   .pc { display: inline; }
-  @media (max-width: 640px) { .pc { display: none; } .hero { padding-top: 1.2rem; } .hero__title { font-size: 1.7rem; } }
+  @media (max-width: 640px) { .pc { display: none; } .hero { padding-top: 1.2rem; } .hero__title { font-size: 1.7rem; } .hero__note .nowrap { display: block; } .hero__note .nowrap + .nowrap::before { content: none; } .hero__note .tel-link--sm { display: inline-block; margin-top: .2em; } }
 
   /* SERVICE: 2列・薄青の円アイコン＋英字キャプション（旧HP） */
   .svc-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem 3rem; background: #fff; padding: 2.4rem 2.6rem; border-radius: var(--radius); box-shadow: 3px 9px 24px rgba(37,95,232,.06); }
@@ -284,13 +289,12 @@ const features = [
   .feat__foot { margin-top: -1rem; }
   @media (max-width: 760px) { .feat { grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.6rem; } .feat--rev .feat__text { order: 0; } }
 
-  /* AREA: 左に文章、右に受付時間（旧HP） */
-  .area { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3rem; align-items: start; }
+  /* AREA */
+  .area__text { max-width: 820px; }
   .area__list { margin: 1.4rem 0; padding: 0; }
   .area__list div { display: grid; grid-template-columns: 6em 1fr; gap: 1rem; padding: .7em 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
   .area__list dt { color: var(--blue); }
   .area__list dd { margin: 0; }
-  @media (max-width: 860px) { .area { grid-template-columns: 1fr; gap: 1.5rem; } }
 
   /* WORKS */
   .works { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
