@@ -16,13 +16,13 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? site.turnstile
 
     <div class="grid grid--2 contact">
       <form class="form" method="post" action="/api/contact">
-        <label>お名前 <span class="req">必須</span>
+        <label><span class="lbl">お名前 <span class="req">必須</span></span>
           <input type="text" name="name" required autocomplete="name" />
         </label>
         <label>会社名・事務所名
           <input type="text" name="company" autocomplete="organization" />
         </label>
-        <label>メールアドレス <span class="req">必須</span>
+        <label><span class="lbl">メールアドレス <span class="req">必須</span></span>
           <input type="email" name="email" required autocomplete="email" />
         </label>
         <label>電話番号
@@ -45,7 +45,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? site.turnstile
         <label>希望時期
           <input type="text" name="timing" placeholder="例: 年内に着工したい" />
         </label>
-        <label>ご相談内容 <span class="req">必須</span>
+        <label><span class="lbl">ご相談内容 <span class="req">必須</span></span>
           <textarea name="message" rows="7" required placeholder="建築・造成のご予定、お手元の資料（登記事項証明書・公図・測量図など）の有無、その他ご質問"></textarea>
         </label>
         <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
@@ -80,10 +80,11 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? site.turnstile
 <style>
   .contact { align-items: start; margin-top: 1rem; }
   .form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; display: grid; gap: 1rem; }
-  .form label { display: grid; gap: .3em; font-weight: 600; font-size: .95rem; }
+  .form label { display: grid; gap: .3em; font-weight: 500; font-size: .95rem; }
   .form input, .form select, .form textarea { font: inherit; padding: .6em .8em; border: 1px solid #cfcac0; border-radius: 6px; background: #fff; width: 100%; }
   .form textarea { resize: vertical; }
-  .req { font-size: .7rem; color: #fff; background: #b04a3a; border-radius: 4px; padding: .1em .5em; margin-left: .3em; vertical-align: middle; }
+  .lbl { display: flex; align-items: center; gap: .4em; }
+  .req { justify-self: start; display: inline-block; font-size: .7rem; color: #fff; background: #b04a3a; border-radius: 4px; padding: .1em .5em; margin-left: .3em; vertical-align: middle; }
   .hp { position: absolute; left: -9999px; }
   .tel { font-size: 1.4rem; font-weight: 400; font-family: var(--font-en); text-decoration: none; }
 </style>
