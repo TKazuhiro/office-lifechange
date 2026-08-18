@@ -1,0 +1,11 @@
+# Cloudflare Pages の設定（Git連携ビルドでも読まれる）
+name = "office-lifechange"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "./dist"
+
+# お問い合わせ帳面（D1）。database_id は `wrangler d1 create office-lifechange-contact` の出力で埋める
+[[d1_databases]]
+binding = "DB"
+database_name = "office-lifechange-contact"
+database_id = "4f0ed384-59a0-4758-88cd-9af2f050d385"
+migrations_dir = "migrations"
