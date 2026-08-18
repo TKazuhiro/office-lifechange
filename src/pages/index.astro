@@ -29,7 +29,7 @@ const features = [
   {
     title: '調べてから、金額を出す',
     body: '許認可の要否と付随する手続は、区域・排水先・農地かどうかで大きく変わります。役所調査を済ませてから正式なお見積を提出します。調査前は目安の幅でお伝えし、単一の金額を先に出しません。',
-    img: { src: '/images/tarui_kansei.jpg', alt: '造成完了後の宅地' },
+    img: { src: '/images/ogaki_kansei.jpg', alt: '造成完了後の道路と宅地' },
   },
   {
     title: '自治体ごとの運用を前提に動く',
@@ -64,7 +64,8 @@ const features = [
         <p class="hero__note">{site.hoursParts.map((h) => <span class="nowrap">{h}</span>)}　<a class="tel-link tel-link--sm" href={`tel:${site.tel.replace(/-/g, '')}`}>{site.tel}</a></p>
       </div>
       <div class="hero__photo">
-        <img src="/images/den.jpg" alt="田園が広がる土地の風景" width="1600" height="1066" fetchpriority="high" />
+        <img src="/images/tarui_kansei.jpg" alt="許認可を経て造成が完了した宅地（岐阜県）" width="1600" height="1200" fetchpriority="high" />
+        <span class="hero__cap">岐阜県｜宅地造成 完了（当事務所が許認可を担当）</span>
       </div>
     </div>
     {latest && (
@@ -253,6 +254,7 @@ const features = [
   .tel-link--sm { font-size: 1rem; }
   .hero__photo { position: relative; }
   .hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .hero__cap { display: block; font-size: .76rem; color: var(--muted); margin-top: .5em; letter-spacing: .06em; }
   .hero__news { display: flex; align-items: center; gap: .8rem; padding: 1.2rem 1.5rem; font-size: .88rem; border-bottom: 1px solid var(--line); margin-top: 1.5rem; }
   .hero__news-label { color: var(--muted); letter-spacing: .2em; font-size: .8rem; }
   .hero__news-sep { color: var(--line); }
