@@ -13,6 +13,7 @@ export const site = {
   hours: '受付 平日 9:00〜18:00 ／ メールフォームは24時間受付',
   hoursParts: ['受付 平日 9:00〜18:00', 'メールフォームは24時間受付'],
   personalBlog: 'https://kazutcha.com',
+  turnstileSiteKey: '0x4AAAAAAEUJgnVq5nAJZ5xs', // Turnstile サイトキー（公開情報）。許可ホスト: office-lifechange.pages.dev / office-lifechange.com
 };
 
 export const nav = [

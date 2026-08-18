@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { site } from '../../data/site';
-const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? site.turnstileSiteKey ?? '';
 ---
 <Base title="お問い合わせ" description="Life行政書士事務所へのお問い合わせ・お見積のご依頼。案件の概要（自治体・所在地・現況・ご予定）をお知らせください。役所調査のうえお見積を提出します。">
   <div class="wrap">
