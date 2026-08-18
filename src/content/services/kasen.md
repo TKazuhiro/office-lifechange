@@ -2,6 +2,8 @@
 title: 河川法の許可申請（第26条ほか）
 short: 河川区域内で橋・排水口・護岸などの工作物を設けるときの許可申請
 law: 河川法第26条 ほか
+en: River Act permit
+icon: river
 image: /images/services/kasen.jpg
 imageAlt: 市街地を流れる護岸された河川と、その沿岸で造成中の宅地（イメージ）
 order: 6

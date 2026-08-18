@@ -2,6 +2,8 @@
 title: 盛土規制法の許可申請
 short: 規制区域内で一定規模の盛土・切土・土石の堆積を行うときの許可申請。排水計算・構造計算を伴うことがあります
 law: 宅地造成及び特定盛土等規制法
+en: Embankment regulation permit
+icon: slope
 image: /images/services/morido.jpg
 imageAlt: 住宅団地で前面道路より約2m高い擁壁上の建て替え予定地（イメージ）
 order: 4

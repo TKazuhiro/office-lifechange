@@ -2,6 +2,8 @@
 title: 開発許可申請（都市計画法第29条）
 short: 宅地の造成や区画の変更を伴う建築計画に必要な、開発行為の許可申請
 law: 都市計画法第29条
+en: Development permit application
+icon: building
 image: /images/services/kaihatsu-kyoka.jpg
 imageAlt: 区画割りされた造成中の宅地と境界杭（イメージ）
 order: 1

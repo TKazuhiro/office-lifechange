@@ -7,6 +7,8 @@ const services = defineCollection({
     title: z.string(),
     short: z.string(), // 一覧カード用の一行説明
     law: z.string(), // 根拠法令
+    en: z.string().optional(), // 英字キャプション（トップの一覧に小さく出す。旧HPの型）
+    icon: z.enum(['building', 'house', 'certificate', 'slope', 'field', 'river', 'road']).optional(), // トップ一覧のアイコン
     order: z.number(),
     period: z.string(), // 所要期間の目安
     fee: z.string(), // 料金の考え方（金額は書かない）

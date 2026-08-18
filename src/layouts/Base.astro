@@ -20,6 +20,9 @@ const current = Astro.url.pathname;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Onest:wght@200;300;400&display=swap" rel="stylesheet" />
     <link rel="icon" href="/images/logo_1.png" type="image/png" />
     <link rel="apple-touch-icon" href="/images/logo_1.png" />
     <meta property="og:type" content="website" />
@@ -50,14 +53,14 @@ const current = Astro.url.pathname;
   <body>
     <header class="site-header">
       <div class="wrap site-header__in">
-        <a class="brand" href="/">
-          <img class="brand__mark" src="/images/logo_1.png" alt="" width="500" height="500" />
-          <span class="brand__text">
-            <span class="brand__name">{site.name}</span>
-            <span class="brand__sub">都市計画法・盛土規制法・農地法の許認可申請</span>
-          </span>
+        <a class="brand" href="/" aria-label={site.name}>
+          <img class="brand__logo" src="/images/title_logo.png" alt={site.name} width="350" height="90" />
         </a>
-        <button class="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="gnav">☰</button>
+        <div class="site-header__right">
+          <a class="btn hdr-contact" href="/contact/">✉ お問い合わせ</a>
+          <a class="tel-link hdr-tel" href={`tel:${site.tel.replace(/-/g, '')}`}>{site.tel}</a>
+          <button class="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="gnav"><span></span><span></span></button>
+        </div>
         <nav id="gnav" class="gnav">
           <ul>
             {nav.map((n) => (
@@ -75,7 +78,7 @@ const current = Astro.url.pathname;
     <footer class="site-footer">
       <div class="wrap site-footer__in">
         <div>
-          <p class="site-footer__name">{site.name}</p>
+          <p class="site-footer__name"><img src="/images/title_logo.png" alt={site.name} width="350" height="90" /></p>
           <p class="small">
             {site.postal} {site.address}<br />
             行政書士 {site.representative}<br />
@@ -128,31 +131,39 @@ const current = Astro.url.pathname;
 </html>
 
 <style>
-  .site-header { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
-  .site-header__in { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 1rem; flex-wrap: wrap; }
-  .brand { text-decoration: none; display: flex; align-items: center; gap: .6rem; line-height: 1.2; padding: .5rem 0; flex: 0 0 auto; }
-  .brand__mark { width: 40px; height: 40px; flex: 0 0 40px; display: block; }
-  .brand__text { display: flex; flex-direction: column; }
-  .brand__name { font-weight: 800; color: var(--navy-dark); font-size: 1.15rem; letter-spacing: .03em; white-space: nowrap; }
-  .brand__sub { font-size: .68rem; color: var(--muted); white-space: nowrap; }
-  @media (max-width: 400px) { .brand__sub { display: none; } }
-  .gnav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.2rem; }
-  .gnav a { text-decoration: none; font-size: .92rem; font-weight: 600; color: var(--text); padding: .4em 0; border-bottom: 2px solid transparent; }
-  .gnav a:hover, .gnav a[aria-current="page"] { border-color: var(--accent); color: var(--navy); }
-  .menu-btn { display: none; background: none; border: 1px solid var(--line); border-radius: 6px; font-size: 1.3rem; padding: .2em .55em; cursor: pointer; color: var(--navy); }
+  /* 旧HPのヘッダー: 左にロゴ画像、右に「お問い合わせ」ボタンと電話番号、ナビは下段（スマホはハンバーガー） */
+  .site-header { background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+  .site-header__in { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 80px; column-gap: 1rem; row-gap: 0; }
+  .brand { display: block; padding: .6rem 0; }
+  .brand__logo { display: block; width: auto; height: 46px; }
+  .site-header__right { display: flex; align-items: center; gap: 1.2rem; }
+  .hdr-contact { font-size: .86rem; padding: .7em 1.4em; }
+  .hdr-tel { font-size: 1.25rem; }
+  .gnav { grid-column: 1 / -1; }
+  .gnav ul { list-style: none; margin: 0; padding: 0 0 .6rem; display: flex; gap: 2rem; }
+  .gnav a { text-decoration: none; font-size: .86rem; font-weight: 400; letter-spacing: .12em; color: var(--text); padding: .3em 0; border-bottom: 1px solid transparent; }
+  .gnav a:hover, .gnav a[aria-current="page"] { border-color: var(--blue); color: var(--blue); opacity: 1; }
+  .menu-btn { display: none; background: none; border: 0; width: 34px; height: 30px; padding: 0; cursor: pointer; position: relative; }
+  .menu-btn span { position: absolute; left: 4px; right: 4px; height: 1px; background: var(--blue); }
+  .menu-btn span:nth-child(1) { top: 10px; } .menu-btn span:nth-child(2) { top: 19px; }
   @media (max-width: 820px) {
+    .site-header__in { min-height: 64px; }
+    .brand__logo { height: 36px; }
+    .hdr-contact, .hdr-tel { display: none; }
     .menu-btn { display: block; }
     .gnav { display: none; width: 100%; padding-bottom: .8rem; }
     .gnav.is-open { display: block; }
     .gnav ul { flex-direction: column; gap: 0; }
-    .gnav a { display: block; padding: .7em .2em; border-bottom: 1px solid var(--line); }
+    .gnav a { display: block; padding: .8em .2em; border-bottom: 1px solid var(--line); }
   }
-  .site-footer { background: var(--navy-dark); color: #d9e0ea; margin-top: 4rem; padding: 2.5rem 0 1rem; }
-  .site-footer a { color: #d9e0ea; text-decoration: none; }
-  .site-footer a:hover { color: #fff; text-decoration: underline; }
-  .site-footer .small { color: #b7c2d1; }
+  /* フッター: 白地・薄青の帯（旧HP） */
+  .site-footer { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, var(--blue-09) 100%); color: var(--text); margin-top: 4rem; padding: 3rem 0 1rem; border-top: 1px solid var(--line); }
+  .site-footer a { color: var(--text); text-decoration: none; }
+  .site-footer a:hover { color: var(--blue); opacity: 1; }
+  .site-footer .small { color: var(--muted); }
   .site-footer__in { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-  .site-footer__name { font-weight: 800; font-size: 1.1rem; color: #fff; margin-bottom: .4em; }
-  .site-footer__nav { list-style: none; margin: 0; padding: 0; display: grid; gap: .3em; }
-  .copyright { text-align: center; font-size: .78rem; color: #8fa0b5; margin: 2rem 0 0; }
+  .site-footer__name { margin-bottom: .8em; }
+  .site-footer__name img { display: block; width: auto; height: 40px; }
+  .site-footer__nav { list-style: none; margin: 0; padding: 0; display: grid; gap: .3em; font-size: .9rem; }
+  .copyright { text-align: center; font-size: .76rem; color: var(--muted); margin: 2rem 0 0; letter-spacing: .1em; }
 </style>

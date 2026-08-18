@@ -1,11 +1,21 @@
 ---
+/**
+ * トップページ（2026-08-18 B案: 旧HPの骨格を継ぎ、中身は承認済みの新しい文章・画像）
+ * 並び: ヒーロー（左文字・右写真・受付時間）→ NEWS一行 → SERVICE → FEATURE → FLOW → AREA → WORKS → ABOUT → NEWS → CONTACT
+ */
 import Base from '../layouts/Base.astro';
 import Flow from '../components/Flow.astro';
+import Hours from '../components/Hours.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import { getCollection } from 'astro:content';
 import { site, areas } from '../data/site';
+import { works as allWorks } from '../data/works';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 5);
+const latest = news[0];
+const works = allWorks.slice(0, 3);
+const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
 const flow = [
   { title: 'お問い合わせ', note: '自治体・所在地・現況・ご予定をお知らせください' },
@@ -16,85 +26,142 @@ const flow = [
   { title: '許可', note: '完了検査等が必要な場合はその対応まで' },
 ];
 
-import { works as allWorks } from '../data/works';
-const works = allWorks.slice(0, 3);
+const features = [
+  {
+    title: '調べてから、金額を出す',
+    body: '許認可の要否と付随する手続は、区域・排水先・農地かどうかで大きく変わります。役所調査を済ませてから正式なお見積を提出します。調査前は目安の幅でお伝えし、単一の金額を先に出しません。',
+    img: { src: '/images/tarui_kansei.jpg', alt: '造成完了後の宅地' },
+  },
+  {
+    title: '自治体ごとの運用を前提に動く',
+    body: '同じ法律でも、条例名・区域指定・窓口の運用は自治体ごとに違います。調査で得た知見は自治体別に集約し、次の案件の調査時間を短くしています。',
+    img: { src: '/images/godo_kansei.jpg', alt: '造成完了後の宅地' },
+  },
+  {
+    title: '知識を蓄積し、次に活かす',
+    body: '調査結果・協議の経過・図面と申請書の数値の突合を、AIを組み込んだ事務所の仕組みで蓄積しています。案件ごとに得た知識を事務所の資産として積み上げ、次のご依頼に活かします。',
+    img: { src: '/images/desk_ai.jpg', alt: '窓の外に田園が広がる机の上のノートパソコンと書類（イメージ・AI生成）' },
+  },
+];
 ---
 <Base>
+  <!-- ヒーロー: 左に見出しと受付時間、右に写真（旧HPの型） -->
   <section class="hero">
-    <div class="hero__bg" style="background-image:url('/images/den.jpg')"></div>
     <div class="wrap hero__in">
-      <p class="eyebrow">岐阜県・愛知県・三重県</p>
-      <h1>土地の許認可で、<br class="sp" />計画を止めない。</h1>
-      <p class="lead">
-        調整区域・農地・盛土など判断に迷う土地の手続を見極め、<br class="pc" />
-        申請から許可までを引き受ける行政書士事務所です。
-      </p>
-      <div class="hero__actions">
-        <a class="btn" href="/services/">業務一覧を見る</a>
-        <a class="btn btn--ghost" href="/contact/">お問い合わせ</a>
+      <div class="hero__text">
+        <p class="hero__eyebrow">岐阜県・愛知県・三重県｜土地の許認可申請</p>
+        <h1 class="hero__title">
+          <span class="hero__l1">土地の許認可で、</span>
+          <span class="hero__l2"><em>計画を止めない。</em></span>
+        </h1>
+        <p class="hero__lead">
+          調整区域・農地・盛土など判断に迷う土地の手続を見極め、<br class="pc" />
+          申請から許可までを引き受ける行政書士事務所です。
+        </p>
+        <div class="hero__hours"><Hours /></div>
+      </div>
+      <div class="hero__photo">
+        <img src="/images/den.jpg" alt="田園が広がる土地の風景" width="1600" height="1066" fetchpriority="high" />
       </div>
     </div>
+    {latest && (
+      <div class="wrap hero__news">
+        <span class="hero__news-label en">NEWS</span>
+        <span class="hero__news-sep">｜</span>
+        <a href="/#news">{latest.data.title}</a>
+      </div>
+    )}
   </section>
 
-  <section class="section">
+  <!-- SERVICE -->
+  <section class="section" id="service">
     <div class="wrap">
-      <h2>取扱業務</h2>
-      <div class="grid grid--4">
+      <div class="sec-head">
+        <span class="sec-label">{site.name}のサービス</span>
+        <h2 class="sec-en">SERVICE</h2>
+      </div>
+      <div class="svc-list">
         {services.map((s) => (
-          <a class="card" href={`/services/${s.id}/`}>
-            <span class="tag">{s.data.law}</span>
-            <h3>{s.data.title.split('（')[0]}</h3>
-            <p class="small">{s.data.short}</p>
-            <span class="more">詳しく見る →</span>
+          <a class="svc" href={`/services/${s.id}/`}>
+            <ServiceIcon name={s.data.icon} />
+            <div class="svc__body">
+              {s.data.en && <span class="svc__en en">{s.data.en}</span>}
+              <h3 class="svc__title">{s.data.title.split('（')[0]}<span class="svc__law">（{s.data.law}）</span></h3>
+              <p class="svc__desc">{s.data.short}</p>
+              <span class="svc__more">詳しく見る →</span>
+            </div>
           </a>
         ))}
       </div>
+      <p class="svc-foot"><a class="btn" href="/services/">業務一覧と手続の全体像を見る</a></p>
     </div>
   </section>
 
-  <section class="section section--alt">
+  <!-- FEATURE -->
+  <section class="section section--alt" id="feature">
     <div class="wrap">
-      <h2>ご依頼から許可までの流れ</h2>
-      <p class="lead">許認可の要否は、区域・排水先・農地かどうかで大きく変わります。まず調べて、必要な手続を確定してからお見積を提示します。</p>
-      <Flow steps={flow} />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>当事務所の進め方</h2>
-      <div class="grid grid--3">
-        <div class="card">
-          <h3>1. 調べてから、金額を出す</h3>
-          <p class="small">
-            許認可の要否と付随する手続は、区域・排水先・農地かどうかで大きく変わります。
-            役所調査を済ませてから正式なお見積を提出します。調査前は目安の幅でお伝えし、単一の金額を先に出しません。
-          </p>
-        </div>
-        <div class="card">
-          <h3>2. 自治体ごとの運用を前提に動く</h3>
-          <p class="small">
-            同じ法律でも、条例名・区域指定・窓口の運用は自治体ごとに違います。
-            調査で得た知見は自治体別に集約し、次の案件の調査時間を短くしています。
-          </p>
-        </div>
-        <div class="card">
-          <h3>3. 知識を蓄積し、次に活かす</h3>
-          <p class="small">
-            調査結果・協議の経過・図面と申請書の数値の突合を、AIを組み込んだ事務所の仕組みで蓄積しています。
-            案件ごとに得た知識を事務所の資産として積み上げ、次のご依頼に活かします。
-          </p>
-        </div>
+      <div class="sec-head">
+        <span class="sec-label">{site.name}の進め方</span>
+        <h2 class="sec-en">FEATURE</h2>
       </div>
-      <p class="small" style="margin-top:1rem">
+      {features.map((f, i) => (
+        <div class={`feat ${i % 2 === 1 ? 'feat--rev' : ''}`}>
+          <div class="feat__text">
+            <span class="feat__num en">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="feat__title">{f.title}</h3>
+            <p>{f.body}</p>
+          </div>
+          <div class="feat__img"><img src={f.img.src} alt={f.img.alt} loading="lazy" width="1600" height="1200" /></div>
+        </div>
+      ))}
+      <p class="small feat__foot">
         士業・設計事務所・不動産業者の方との連携の進め方は <a href="/partners/">士業・事業者の方へ</a> をご覧ください。
       </p>
     </div>
   </section>
 
-  <section class="section section--alt">
+  <!-- FLOW -->
+  <section class="section" id="flow">
     <div class="wrap">
-      <h2>これまでの現場から</h2>
+      <div class="sec-head">
+        <span class="sec-label">ご依頼から許可までの流れ</span>
+        <h2 class="sec-en">FLOW</h2>
+      </div>
+      <p class="lead">許認可の要否は、区域・排水先・農地かどうかで大きく変わります。まず調べて、必要な手続を確定してからお見積を提示します。</p>
+      <Flow steps={flow} />
+    </div>
+  </section>
+
+  <!-- AREA -->
+  <section class="section section--alt" id="area">
+    <div class="wrap area">
+      <div class="area__text">
+        <div class="sec-head">
+          <span class="sec-label">対応エリア</span>
+          <h2 class="sec-en">AREA</h2>
+        </div>
+        <p>現在、「岐阜」「愛知」「三重」エリアに対応しております。<br />お客様のご来所、ZoomなどのWeb対応、郵送対応であれば、掲載市町村外でもご相談ください。</p>
+        <dl class="area__list">
+          {areas.map((a) => (
+            <div>
+              <dt>{a.pref}</dt>
+              <dd>{a.note ? a.note : a.cities.join('、')}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="small">自治体ごとの詳細は <a href="/area/">対応エリア</a> へ。</p>
+      </div>
+      <div class="area__side"><Hours /></div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="section" id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-label">これまでの現場から</span>
+        <h2 class="sec-en">WORKS</h2>
+      </div>
       <p class="lead">許認可を担当した造成・建築の現場です。</p>
       <div class="works">
         {works.map((w) => (
@@ -104,74 +171,152 @@ const works = allWorks.slice(0, 3);
           </figure>
         ))}
       </div>
-      <p style="margin-top:1rem"><a class="btn btn--ghost" href="/works/">現場写真をもっと見る</a></p>
+      <p style="margin-top:1.4rem"><a class="btn" href="/works/">現場写真をもっと見る</a></p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>対応エリア</h2>
-      <div class="grid grid--3">
-        {areas.map((a) => (
-          <div class="card">
-            <h3>{a.pref}</h3>
-            {a.note ? <p>{a.note}</p> : <p class="small">{a.cities.join('・')}</p>}
-          </div>
-        ))}
+  <!-- ABOUT（代表あいさつ） -->
+  <section class="section section--alt" id="about">
+    <div class="wrap about">
+      <div class="about__head">
+        <span class="about__en en">Takahashi Kazuhiro</span>
+        <p class="about__name">{site.representative}</p>
+        <div class="sec-head">
+          <span class="sec-label">{site.name}について</span>
+          <h2 class="sec-en">ABOUT US</h2>
+        </div>
       </div>
-      <p class="small" style="margin-top:.8rem">
-        上記以外の地域もご相談ください。詳細は <a href="/area/">対応エリア</a> へ。
-      </p>
+      <div class="about__body">
+        <p>お客様のご要望に最大限配慮し、迅速に業務を進めることを基本方針として、土地に関する許認可に特化した事務所です。</p>
+        <p>
+          地方公共団体で15年間、土木・上下水道の設計と施工管理の実務に携わったのち独立し、{site.name}を設立しました。
+          行政側で図面と申請を受ける立場にいた経験を活かし、開発許可・建築許可・盛土規制法など、設計と申請の両方が分かる立場で許認可を進めています。
+        </p>
+        <p>
+          土地に関する許可は審査期間が長く、書類を作るのにも土木設計などの専門的な技術が要ります。
+          業務を土地の許認可に特化し、調査・協議・図面と申請書の突合を仕組みとして蓄積することで、許可までの遅れを少なくすることを目指しています。
+        </p>
+        <p><a class="btn" href="/about/">事務所について</a></p>
+      </div>
     </div>
   </section>
 
+  <!-- NEWS -->
   {news.length > 0 && (
-    <section class="section section--alt">
+    <section class="section" id="news">
       <div class="wrap">
-        <h2>お知らせ</h2>
+        <div class="sec-head">
+          <span class="sec-label">お知らせ</span>
+          <h2 class="sec-en">NEWS</h2>
+        </div>
         <ul class="news">
           {news.map((n) => (
-            <li><time datetime={n.data.date.toISOString()}>{n.data.date.toLocaleDateString('ja-JP')}</time><span>{n.data.title}</span></li>
+            <li><time class="en" datetime={n.data.date.toISOString()}>{fmt(n.data.date)}</time><span class="news__cat">お知らせ</span><span>{n.data.title}</span></li>
           ))}
         </ul>
       </div>
     </section>
   )}
 
-  <section class="section">
-    <div class="wrap">
-      <div class="cta">
-        <h2>ご相談・お見積のご依頼</h2>
-        <p>案件の概要（自治体・所在地・現況・ご予定）をお知らせください。役所調査のうえ、お見積を提出します。</p>
-        <a class="btn" href="/contact/">お問い合わせフォームへ</a>
-        <p class="cta__tel"><a href={`tel:${site.tel.replace(/-/g, '')}`}>TEL {site.tel}</a></p>
-        <p class="cta__hours">{site.hoursParts.map((h) => <span class="nowrap">{h}</span>)}</p>
+  <!-- CONTACT -->
+  <section class="section section--alt" id="contact">
+    <div class="wrap contact">
+      <div class="sec-head">
+        <span class="sec-label">お問い合わせ</span>
+        <h2 class="sec-en">CONTACT</h2>
       </div>
+      <p>案件の概要（自治体・所在地・現況・ご予定）をお知らせください。役所調査のうえ、お見積を提出します。</p>
+      <div class="contact__actions">
+        <a class="tel-link" href={`tel:${site.tel.replace(/-/g, '')}`}>{site.tel}</a>
+        <a class="btn btn--solid" href="/contact/">✉ お問い合わせフォームへ</a>
+      </div>
+      <p class="small">{site.hoursParts.map((h) => <span class="nowrap">{h}</span>)}</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero { position: relative; padding: 4.5rem 0 4rem; border-bottom: 1px solid var(--line); overflow: hidden; color: #fff; }
-  .hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center 60%; }
-  .hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(22,42,69,.88) 0%, rgba(22,42,69,.72) 55%, rgba(22,42,69,.45) 100%); }
-  .hero__in { position: relative; }
-  .hero h1 { font-size: 1.9rem; color: #fff; }
-  .hero .eyebrow { color: #e7c86a; }
-  .hero .lead { max-width: 760px; color: #e6ebf2; }
-  .hero__actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.4rem; }
-  .hero .btn { background: #fff; color: var(--navy); border-color: #fff; }
-  .hero .btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .hero .btn--ghost { background: transparent; color: #fff; }
-  .hero .btn--ghost:hover { background: #fff; color: var(--navy); }
-  .works { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  /* ヒーロー */
+  .hero { padding: 2.5rem 0 0; }
+  .hero__in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; align-items: start; }
+  .hero__eyebrow { font-size: .82rem; letter-spacing: .16em; color: var(--muted); margin: 1.5rem 0 1rem; }
+  .hero__title { font-weight: 300; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.45; letter-spacing: .12em; margin: 0 0 1.2rem; }
+  .hero__title span { display: block; }
+  .hero__title em { font-style: normal; color: var(--blue); }
+  .hero__lead { color: var(--muted); font-size: .95rem; margin-bottom: 1.6rem; }
+  .hero__hours { max-width: 460px; }
+  .hero__photo { position: relative; }
+  .hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .hero__news { display: flex; align-items: center; gap: .8rem; padding: 1.2rem 1.5rem; font-size: .88rem; border-bottom: 1px solid var(--line); margin-top: 1.5rem; }
+  .hero__news-label { color: var(--muted); letter-spacing: .2em; font-size: .8rem; }
+  .hero__news-sep { color: var(--line); }
+  .hero__news a { color: var(--text); text-decoration: none; }
+  .hero__news a:hover { color: var(--blue); }
+  @media (max-width: 900px) {
+    .hero__in { grid-template-columns: 1fr; gap: 1.5rem; }
+    .hero__photo { order: -1; }
+    .hero__hours { max-width: none; }
+    .hero__eyebrow { margin-top: 0; }
+  }
+  .pc { display: inline; }
+  @media (max-width: 640px) { .pc { display: none; } .hero { padding-top: 1.2rem; } .hero__title { font-size: 1.7rem; } }
+
+  /* SERVICE: 2列・薄青の円アイコン＋英字キャプション（旧HP） */
+  .svc-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem 3rem; background: #fff; padding: 2.4rem 2.6rem; border-radius: var(--radius); box-shadow: 3px 9px 24px rgba(37,95,232,.06); }
+  .svc { display: flex; gap: 1.3rem; text-decoration: none; color: inherit; align-items: flex-start; }
+  .svc:hover { opacity: 1; }
+  .svc:hover .svc__title { color: var(--blue); }
+  .svc__body { min-width: 0; }
+  .svc__en { display: block; font-size: .72rem; color: var(--muted); letter-spacing: .1em; }
+  .svc__title { margin: .1em 0 .5em; font-size: 1.08rem; font-weight: 400; transition: color .15s; }
+  .svc__law { display: block; font-size: .78rem; color: var(--muted); letter-spacing: .06em; }
+  .svc__desc { font-size: .9rem; color: var(--text); margin-bottom: .4em; }
+  .svc__more { font-size: .84rem; color: var(--blue); }
+  .svc-foot { margin-top: 2rem; text-align: center; }
+  @media (max-width: 760px) { .svc-list { grid-template-columns: 1fr; padding: 1.4rem 1.2rem; gap: 1.8rem; } }
+
+  /* FEATURE: 大きな薄青の番号＋タイトル＋文章、右に写真（旧HP） */
+  .feat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: center; margin-bottom: 4rem; }
+  .feat--rev .feat__text { order: 2; }
+  .feat__num { display: block; font-size: 3rem; font-weight: 200; color: var(--blue-36); line-height: 1; margin-bottom: .6rem; }
+  .feat__title { font-size: 1.3rem; font-weight: 400; margin: 0 0 1rem; }
+  .feat__img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .feat__foot { margin-top: -1rem; }
+  @media (max-width: 760px) { .feat { grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.6rem; } .feat--rev .feat__text { order: 0; } }
+
+  /* AREA: 左に文章、右に受付時間（旧HP） */
+  .area { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3rem; align-items: start; }
+  .area__list { margin: 1.4rem 0; padding: 0; }
+  .area__list div { display: grid; grid-template-columns: 6em 1fr; gap: 1rem; padding: .7em 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+  .area__list dt { color: var(--blue); }
+  .area__list dd { margin: 0; }
+  @media (max-width: 860px) { .area { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  /* WORKS */
+  .works { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
   .works__item { margin: 0; }
   .works__item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); display: block; }
-  .works__item figcaption { font-size: .82rem; color: var(--muted); margin-top: .4em; }
+  .works__item figcaption { font-size: .82rem; color: var(--muted); margin-top: .5em; }
+
+  /* ABOUT */
+  .about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 3rem; align-items: start; }
+  .about__en { display: block; font-size: .8rem; color: var(--muted); letter-spacing: .18em; }
+  .about__name { font-size: 1.5rem; letter-spacing: .3em; margin: .1em 0 1.6rem; }
+  .about__body p { max-width: 640px; }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 1rem; } }
+
+  /* NEWS */
   .news { list-style: none; padding: 0; margin: 0; }
-  .news li { display: flex; gap: 1.2rem; padding: .6em 0; border-bottom: 1px solid var(--line); }
-  .news time { color: var(--muted); font-size: .9rem; white-space: nowrap; }
-  .sp { display: none; }
-  .hero h1 { font-size: 2.2rem; letter-spacing: .02em; }
-  @media (max-width: 640px) { .pc { display: none; } .sp { display: inline; } .hero h1 { font-size: 1.6rem; } .hero { padding: 3rem 0 2.5rem; } }
+  .news li { display: flex; gap: 1.4rem; align-items: baseline; padding: .9em 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+  .news time { color: var(--muted); font-size: .86rem; white-space: nowrap; }
+  .news__cat { font-size: .74rem; color: var(--blue); background: var(--blue-09); padding: .1em .7em; border-radius: 3px; white-space: nowrap; }
+  @media (max-width: 640px) { .news li { flex-wrap: wrap; gap: .5rem 1rem; } }
+
+  /* CONTACT */
+  .contact { text-align: center; }
+  .contact .sec-head { text-align: center; }
+  .contact__actions { display: flex; justify-content: center; align-items: center; gap: 1.6rem; flex-wrap: wrap; margin: 1.4rem 0 1rem; }
+  .contact .nowrap { display: inline-block; white-space: nowrap; }
+  .contact .nowrap + .nowrap::before { content: '／'; margin: 0 .4em; }
+  @media (max-width: 640px) { .contact .nowrap { display: block; } .contact .nowrap + .nowrap::before { content: none; } }
 </style>

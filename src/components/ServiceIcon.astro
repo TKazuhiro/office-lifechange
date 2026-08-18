@@ -1,0 +1,35 @@
+---
+/** トップの業務一覧用の線画アイコン（旧HPの「薄青の円＋線アイコン」の型）。自前SVG。 */
+interface Props { name?: string }
+const { name = 'certificate' } = Astro.props;
+---
+<span class="svc-icon" aria-hidden="true">
+  <svg viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    {name === 'building' && <>
+      <path d="M8 40h32M12 40V16l10-6v30M22 40V22l14 6v12" /><path d="M15 20h2M15 26h2M15 32h2M28 30h2M28 35h2" />
+    </>}
+    {name === 'house' && <>
+      <path d="M8 24 24 10l16 14" /><path d="M13 21v19h22V21" /><path d="M21 40v-9h6v9" /><path d="M32 8v6" />
+    </>}
+    {name === 'certificate' && <>
+      <rect x="10" y="8" width="28" height="32" rx="2" /><path d="M16 16h16M16 22h16M16 28h10" /><circle cx="31" cy="33" r="3.5" />
+    </>}
+    {name === 'slope' && <>
+      <path d="M6 40h36" /><path d="M8 40 20 22h12l10 18" /><path d="M20 22V14h12v8" /><path d="M14 31h20" />
+    </>}
+    {name === 'field' && <>
+      <path d="M6 38c8-3 12-8 18-8s10 5 18 8" /><path d="M6 32c8-3 12-8 18-8s10 5 18 8" /><path d="M24 24V10" /><path d="M24 14c-4-2-6-6-6-6s5 0 6 6ZM24 14c4-2 6-6 6-6s-5 0-6 6Z" />
+    </>}
+    {name === 'river' && <>
+      <path d="M8 16c6-4 10 4 16 0s10 4 16 0" /><path d="M8 24c6-4 10 4 16 0s10 4 16 0" /><path d="M8 32c6-4 10 4 16 0s10 4 16 0" /><path d="M14 40h20" />
+    </>}
+    {name === 'road' && <>
+      <path d="M14 8 8 40M34 8l6 32" /><path d="M24 10v5M24 21v6M24 33v7" /><path d="M8 40h32" />
+    </>}
+  </svg>
+</span>
+
+<style>
+  .svc-icon { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: var(--blue-09); color: var(--blue); flex: 0 0 72px; }
+  @media (max-width: 640px) { .svc-icon { width: 56px; height: 56px; flex-basis: 56px; } .svc-icon svg { width: 24px; height: 24px; } }
+</style>

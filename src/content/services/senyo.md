@@ -2,6 +2,8 @@
 title: 道路・水路の占用許可（道路占用・法定外公共物・自費工事承認）
 short: 排水管の接続、乗入口の設置など、道路・里道・水路に手を加えるときの許可・承認申請
 law: 道路法・法定外公共物条例 ほか
+en: Road / waterway occupancy permit
+icon: road
 image: /images/services/senyo.jpg
 imageAlt: 造成した宅地と、前面道路の側溝・排水路（イメージ）
 order: 7

@@ -2,6 +2,8 @@
 title: 農地転用の許可・届出（農地法第4条・第5条）
 short: 農地を宅地・駐車場・資材置場などにするときの許可申請・届出。農振除外や土地改良区の手続を伴うことがあります
 law: 農地法第4条・第5条 ほか
+en: Farmland conversion permit
+icon: field
 image: /images/services/nochi.jpg
 imageAlt: 住宅が連たんする調整区域で1区画だけ整地された転用予定の田（イメージ）
 order: 5

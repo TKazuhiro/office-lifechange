@@ -2,6 +2,8 @@
 title: 建築許可申請（都市計画法第43条）
 short: 市街化調整区域で建物を建てるときの許可申請。当事務所で件数の最も多い業務です
 law: 都市計画法第43条第1項
+en: Building permit application
+icon: house
 image: /images/services/kenchiku-kyoka.jpg
 imageAlt: 田んぼに囲まれた集落で新築工事中の木造住宅（イメージ）
 order: 2
