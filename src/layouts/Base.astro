@@ -136,21 +136,21 @@ const current = Astro.url.pathname;
 
 <style>
   /* 旧HPのヘッダー: 左にロゴ画像、右に「お問い合わせ」ボタンと電話番号、ナビは下段（スマホはハンバーガー） */
-  .site-header { background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+  .site-header { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; } /* ガラス調(半透明+blur)→不透明の面（金継ぎ 2026-08-28・型紙 glass） */
   .site-header__in { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 80px; column-gap: 1rem; row-gap: 0; }
   .brand { text-decoration: none; display: flex; align-items: center; gap: .7rem; line-height: 1.25; padding: .6rem 0; }
   .brand:hover { opacity: 1; }
   .brand__mark { width: 44px; height: 44px; flex: 0 0 44px; display: block; }
   .brand__text { display: flex; flex-direction: column; }
-  .brand__name { font-weight: 500; color: var(--navy-dark); font-size: 1.2rem; letter-spacing: .12em; white-space: nowrap; }
-  .brand__sub { font-size: .7rem; color: var(--muted); letter-spacing: .08em; white-space: nowrap; }
+  .brand__name { font-weight: 500; color: var(--navy-dark); font-size: 1.35rem; letter-spacing: .12em; white-space: nowrap; } /* 電話番号と同じ段に（金継ぎ 2026-08-28） */
+  .brand__sub { font-size: .75rem; color: var(--muted); letter-spacing: .08em; white-space: nowrap; } /* 極小11.2px→12px（金継ぎ 2026-08-28） */
   @media (max-width: 420px) { .brand__sub { display: none; } }
   .site-header__right { display: flex; align-items: center; gap: 1.2rem; }
-  .hdr-contact { font-size: .86rem; padding: .7em 1.4em; }
-  .hdr-tel { font-size: 1.25rem; }
+  .hdr-contact { font-size: .92rem; padding: .7em 1.4em; }
+  .hdr-tel { font-size: 1.35rem; }
   .gnav { grid-column: 1 / -1; }
   .gnav ul { list-style: none; margin: 0; padding: 0 0 .6rem; display: flex; gap: 2rem; }
-  .gnav a { text-decoration: none; font-size: .86rem; font-weight: 400; letter-spacing: .12em; color: var(--text); padding: .3em 0; border-bottom: 1px solid transparent; }
+  .gnav a { text-decoration: none; font-size: .875rem; font-weight: 400; letter-spacing: .12em; color: var(--text); padding: .3em 0; border-bottom: 1px solid transparent; }
   .gnav a:hover, .gnav a[aria-current="page"] { border-color: var(--blue); color: var(--blue); opacity: 1; }
   .menu-btn { display: none; background: none; border: 0; width: 34px; height: 30px; padding: 0; cursor: pointer; position: relative; }
   .menu-btn span { position: absolute; left: 4px; right: 4px; height: 1px; background: var(--blue); }
@@ -172,8 +172,8 @@ const current = Astro.url.pathname;
   .site-footer a:hover { color: var(--blue); opacity: 1; }
   .site-footer .small { color: var(--muted); }
   .site-footer__in { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-  .site-footer__name { margin-bottom: .8em; display: flex; align-items: center; gap: .6rem; font-size: 1.1rem; letter-spacing: .12em; font-weight: 500; color: var(--navy-dark); }
+  .site-footer__name { margin-bottom: .8em; display: flex; align-items: center; gap: .6rem; font-size: 1rem; letter-spacing: .12em; font-weight: 500; color: var(--navy-dark); }
   .site-footer__name img { width: 36px; height: 36px; display: block; }
-  .site-footer__nav { list-style: none; margin: 0; padding: 0; display: grid; gap: .3em; font-size: .9rem; }
-  .copyright { text-align: center; font-size: .76rem; color: var(--muted); margin: 2rem 0 0; letter-spacing: .1em; }
+  .site-footer__nav { list-style: none; margin: 0; padding: 0; display: grid; gap: .3em; font-size: .875rem; }
+  .copyright { text-align: center; font-size: .875rem; color: var(--muted); margin: 2rem 0 0; letter-spacing: .1em; }
 </style>
