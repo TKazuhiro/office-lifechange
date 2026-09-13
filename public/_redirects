@@ -24,6 +24,6 @@
 /wp-login.php                 /           301
 /wp-admin/*                   /           301
 /xmlrpc.php                   /           301
-/wp-json/*                    /           404
-/wp-content/*                 /           404
-/wp-includes/*                /           404
+/wp-json/*                    /           301
+/wp-content/*                 /           301
+/wp-includes/*                /           301
