@@ -1,0 +1,29 @@
+# 旧 WordPress（office-lifechange.com・2025-03 公開）の URL → 新サイトへの 301
+# 出典: 旧サイトの wp-sitemap（page / news / news-cat / post-archive）を 2026-09-13 に取得
+# Cloudflare Pages の _redirects 形式。日本語パスは URL エンコードした形と生の形の両方を書く
+
+# ページ
+/office_explanation/          /about/     301
+/office_explanation           /about/     301
+/form/                        /contact/   301
+/form                         /contact/   301
+/faq/                         /services/  301
+/faq                          /services/  301
+
+# AI事務所-カレンダー読取（検証用のページ。トップへ）
+/ai%E4%BA%8B%E5%8B%99%E6%89%80-%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%E8%AA%AD%E5%8F%96/  /  301
+/ai事務所-カレンダー読取/     /           301
+
+# お知らせ（新サイトにはお知らせの個別ページが無い。トップへ）
+/news/*                       /           301
+/news-cat/*                   /           301
+
+# WordPress の残骸（検索・フィード・管理画面・API）。ボットが叩き続けるので入口を塞ぐ
+/feed/*                       /           301
+/feed                         /           301
+/wp-login.php                 /           301
+/wp-admin/*                   /           301
+/xmlrpc.php                   /           301
+/wp-json/*                    /           404
+/wp-content/*                 /           404
+/wp-includes/*                /           404
