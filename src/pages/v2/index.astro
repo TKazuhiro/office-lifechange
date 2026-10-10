@@ -1,0 +1,114 @@
+---
+// 新デザインのトップ（Figma案 ver0.2 の文言が正・2026-10-10）
+import V2 from '../../layouts/V2.astro';
+import { site, areas } from '../../data/site';
+
+const telHref = `tel:${site.tel.replace(/-/g, '')}`;
+const purposes = [
+  { n: '01', t: '調整区域に建てたい・建て替えたい', d: '市街化調整区域に、家や事務所を建てたい・建て替えたいとき。', rel: '43条許可／60条証明／29条開発許可', href: '/services/kenchiku-kyoka/' },
+  { n: '02', t: '造成・盛土をしたい', d: '宅地の造成や、擁壁・盛土を施工するとき。', rel: '盛土規制法／29条開発許可', href: '/services/morido/' },
+  { n: '03', t: '農地を使いたい', d: '田んぼや畑を、家・駐車場・資材置場などに変えたいとき。', rel: '農地法5条・4条／農振除外', href: '/services/nochi/' },
+  { n: '04', t: '申請に使う図面や土量が要る', d: '許可の申請に添える現況図と土量計算を、3Dスキャナで測ってお作りします。', rel: '現況調査（3D計測併用）・設計', href: '/v2/onestop/' },
+];
+const steps = [
+  { t: '現況調査', d: '3Dスキャナで敷地を計測し、高さと形を記録します。' },
+  { t: '図面・設計', d: '現況図・造成計画・排水計画の図面をまとめます。' },
+  { t: '協議・申請', d: '役所に前もって相談し、その自治体の決まりに合わせて申請書をつくって出します。' },
+  { t: '許可・完了', d: '許可が出たあとの届出や、工事が終わったあとの検査まで付き添います。' },
+];
+const laws = [
+  { t: '都市計画法 29条（開発許可）', href: '/services/kaihatsu-kyoka/' },
+  { t: '都市計画法 43条（建築許可）', href: '/services/kenchiku-kyoka/' },
+  { t: '60条証明', href: '/services/60jo/' },
+  { t: '盛土規制法', href: '/services/morido/' },
+  { t: '農地法', href: '/services/nochi/' },
+  { t: '河川法', href: '/services/kasen/' },
+  { t: '道路・水路の占用許可', href: '/services/senyo/' },
+];
+---
+<V2>
+  <section class="v2-hero" aria-label="はじめに">
+    <picture>
+      <source media="(max-width: 600px)" srcset="/images/v2/hero_sp-2026q4.jpg" />
+      <img src="/images/v2/hero_pc-2026q4.jpg" alt="造成を終えた土地と、奥に建つ住宅" width="1600" height="685" fetchpriority="high" />
+    </picture>
+    <div class="copy">
+      <h1>土地の許認可で、<br />着工を止めない。</h1>
+      <p>測るところから、許可まで。岐阜・愛知・三重。</p>
+      <div class="btns"><a class="p" href="/contact/">相談する</a><a class="s" href={telHref}>電話 {site.tel}</a></div>
+    </div>
+  </section>
+  <p class="v2-cap">写真：当事務所が許認可申請を担当した造成地（色調整・一部ぼかし）</p>
+
+  <section class="v2-sec" id="purpose">
+    <p class="v2-lbl">PURPOSE</p>
+    <h2 class="v2-h2">その土地で、何をしたいですか？</h2>
+    <p class="v2-lead">法律の名前は分からなくて大丈夫です。やりたいことを選んでもらえれば、必要な手続きと進め方をご案内します。</p>
+    <div class="v2-pgrid">
+      {purposes.map((p) => (
+        <a class="v2-pcard" href={p.href}>
+          <span class="num">{p.n}</span>
+          <h3>{p.t}</h3>
+          <p>{p.d}</p>
+          <p class="rel">{p.rel}</p>
+          <p class="more">詳しく見る →</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">PROCESS</p>
+    <h2 class="v2-h2">測って、図面にして、申請するまで</h2>
+    <p class="v2-lead">現地の調査も、図面も、役所への申請も、当事務所の担当がひとりで受け持ちます。途中で担当が変わらないので、「いまどこまで進んでいて、何を待っているのか」をすぐにお答えできます。</p>
+    <div class="v2-sgrid">
+      {steps.map((s, i) => (
+        <div class="v2-step">
+          <div class="v2-ph">点群・図面の画像<br />（来週の現場から差し替え）</div>
+          <p class="n">STEP {i + 1}</p>
+          <h3>{s.t}</h3>
+          <p>{s.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="v2-band">
+    <div>
+      <h2>司法書士・不動産・設計の方へ</h2>
+      <p>土地の許認可が絡む案件があれば、ご紹介ください。最初にいただきたい資料、見積の出し方、途中経過のお知らせの仕方を1ページにまとめました。</p>
+    </div>
+    <a href="/partners/">紹介のしかたを見る →</a>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">INDEX</p>
+    <h2 class="v2-h2">法律の名前や地域から探す</h2>
+    <div class="v2-two">
+      <ul class="v2-list">
+        {laws.map((l) => <li><a href={l.href}><span>{l.t}</span><span>→</span></a></li>)}
+      </ul>
+      <div class="v2-area">
+        {areas.map((a) => (<><b>{a.pref}</b>{a.note || a.cities.join('／')}</>))}
+      </div>
+    </div>
+    <p class="v2-note">境界を決めたり、土地を分けて登記したりするのは、土地家屋調査士さんのお仕事です。当事務所は、許可をとるための現地の調査と図面を担当し、境界が関わるときは調査士さんと分担して進めます。</p>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">ABOUT</p>
+    <h2 class="v2-h2">事務所について</h2>
+    <div class="v2-about">
+      <figure>
+        <img src="/images/v2/kamagatani-2026q4.jpg" alt="霞間ヶ渓（池田町）の山と桜並木" width="1400" height="933" loading="lazy" />
+        <figcaption class="v2-cap" style="margin-left:0">写真：霞間ヶ渓（池田町）</figcaption>
+      </figure>
+      <dl>
+        <dt>代表</dt><dd>行政書士 {site.representative}（登録番号 {site.registrationNo}）</dd>
+        <dt>資格</dt><dd>盛土規制法・都市計画法の設計者資格／測量士補／2級土木施工管理技士</dd>
+        <dt>経歴</dt><dd>土木・上下水道の設計と施工管理に15年</dd>
+        <dt>所在地</dt><dd>{site.postal} {site.address}</dd>
+      </dl>
+    </div>
+  </section>
+</V2>

@@ -1,0 +1,72 @@
+---
+// 新デザイン（Figma案 ver0.2）用のレイアウト。比較用の試作なので noindex。既存の Base.astro は触らない
+import '../styles/redesign.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title}｜${site.name}` : `${site.name}｜土地の許認可で、着工を止めない。`;
+const telHref = `tel:${site.tel.replace(/-/g, '')}`;
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Zen+Old+Mincho:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/images/logo_1.png" type="image/png" />
+  </head>
+  <body>
+    <header class="v2-hdr">
+      <a class="v2-logo" href="/v2/">
+        <img src="/images/logo_1.png" alt="" width="500" height="500" />
+        <span><span class="nm">{site.name}</span><span class="sub">都市計画法・盛土規制法・農地法の許認可</span></span>
+      </a>
+      <button class="v2-menu" type="button" aria-label="メニュー" aria-expanded="false" aria-controls="v2nav"><span></span><span></span><span></span></button>
+      <nav id="v2nav" class="v2-nav">
+        <a href="/v2/#purpose">目的から探す</a>
+        <a href="/v2/onestop/">調査から申請まで</a>
+        <a href="/partners/">士業・事業者の方へ</a>
+        <a href="/about/">事務所について</a>
+        <a class="btn" href="/contact/">お問い合わせ</a>
+      </nav>
+    </header>
+
+    <main><slot /></main>
+
+    <section class="v2-cta" aria-labelledby="v2-cta-h">
+      <div>
+        <h2 id="v2-cta-h">まずは、土地の場所と<br />やりたいことを教えてください。</h2>
+        <p class="hint">地番が分からなくても大丈夫です。</p>
+      </div>
+      <div class="right">
+        <a class="tel" href={telHref}>{site.tel}</a>
+        <p class="hrs">{site.hours}</p>
+        <a class="btn" href="/contact/">相談フォームへ</a>
+      </div>
+    </section>
+
+    <footer class="v2-ftr">
+      <span>{site.name}　{site.postal} {site.address}</span>
+      <a href="/privacy/">プライバシーポリシー</a>
+    </footer>
+
+    <script>
+      const btn = document.querySelector('.v2-menu');
+      const nav = document.getElementById('v2nav');
+      btn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(!!open));
+      });
+    </script>
+  </body>
+</html>
