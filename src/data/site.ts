@@ -5,7 +5,7 @@ export const site = {
     '岐阜県揖斐郡池田町のLife行政書士事務所。開発許可（都市計画法29条）・建築許可（43条）・60条証明・盛土規制法・農地転用・河川法・占用許可など、土地に関する許認可申請を岐阜県・愛知県・三重県で承ります。',
   url: 'https://office-lifechange.com',
   representative: '髙橋 一浩',
-  postal: '〒503-2422',
+  postal: '〒503-2426',
   address: '岐阜県揖斐郡池田町八幡998番地',
   tel: '090-7690-7557',
   registrationNo: '19200212',
