@@ -40,6 +40,7 @@
 .wrap .breadcrumb a { color: var(--sub); text-decoration: none; }
 .page-head { padding: 48px 0 16px; }
 .page-head h1 { margin-bottom: .4em; }
+.page-head h1 .h1-sub { display: block; font-size: .55em; color: var(--sub); letter-spacing: .06em; margin-top: .3em; }
 .wrap .lead { font-size: 15px; color: var(--body); max-width: 46em; }
 
 .tag { display: inline-block; font-family: var(--mincho); font-size: 12px; letter-spacing: .14em; color: var(--accent); background: none; border: 1px solid var(--accent); padding: .1em .7em; margin-right: .3em; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
@@ -82,7 +83,7 @@ dialog.zoom .zoom__tip { position: fixed; top: 1rem; left: 1rem; color: #fff; fo
 .prose h2:first-child { margin-top: 0; }
 
 @media (max-width: 600px) {
-  .wrap h1 { font-size: 1.5rem; }
+  .wrap h1 { font-size: 1.35rem; }
   .wrap h2 { font-size: 1.2rem; }
   .page-head { padding-top: 28px; }
   .wrap table { font-size: .88rem; }

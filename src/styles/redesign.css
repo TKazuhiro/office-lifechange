@@ -18,6 +18,10 @@ body { background: #fff; color: var(--ink); font-family: var(--gothic); font-wei
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 p, li, dd { word-break: auto-phrase; }
+/* 1行で見せる部品は折り返さない（ナビ・ロゴ・ボタン・電話番号） */
+.v2-nav a, .v2-logo .nm, .v2-logo .sub, .v2-hero .btns a, .v2-cta .tel, .v2-cta .btn, .btn { white-space: nowrap; }
+/* 見出しは言葉の途中で折らない */
+h1, h2, h3 { word-break: auto-phrase; }
 
 /* ヘッダー */
 .v2-hdr { display: flex; align-items: center; justify-content: space-between; padding: 28px var(--gutter); }
@@ -138,17 +142,21 @@ p, li, dd { word-break: auto-phrase; }
   .v2-band { display: block; }
   .v2-band a { display: inline-block; margin-top: 20px; }
 }
-/* スマホ */
-@media (max-width: 600px) {
-  :root { --gutter: 20px; }
-  .v2-hdr { padding: 18px var(--gutter); position: relative; }
-  .v2-logo .sub { display: none; }
-  .v2-logo .nm { font-size: 15px; }
+/* メニューをボタン（≡）に畳む幅。メニュー5つ＋ロゴが1行に収まらない幅（実測で 960px 以下は折れた）より広めに取る */
+@media (max-width: 1024px) {
+  .v2-hdr { position: relative; }
   .v2-menu { display: block; }
   .v2-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 0 var(--gutter) 16px; z-index: 10; border-bottom: 1px solid var(--line); }
   .v2-nav.is-open { display: flex; }
   .v2-nav a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
   .v2-nav .btn { margin-top: 12px; text-align: center; border: 0; }
+}
+/* スマホ */
+@media (max-width: 600px) {
+  :root { --gutter: 20px; }
+  .v2-hdr { padding: 18px var(--gutter); }
+  .v2-logo .sub { display: none; }
+  .v2-logo .nm { font-size: 15px; }
   .v2-hero { height: 480px; }
   .v2-hero .copy { left: 24px; right: 24px; top: 40px; }
   .v2-hero h1 { font-size: 26px; }

@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Flow from '../../components/Flow.astro';
 import DrainageMap from '../../components/DrainageMap.astro';
 import ZoneMap from '../../components/ZoneMap.astro';
-import MoridoMap from '../../components/MoridoMap.astro';
+import MoridoGuide from '../../components/MoridoGuide.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -20,7 +20,7 @@ const d = entry.data;
     <p class="breadcrumb"><a href="/">ホーム</a> › <a href="/services/">業務一覧</a> › {d.title}</p>
     <div class="page-head">
       <span class="tag">{d.law}</span>
-      <h1>{d.title}</h1>
+      <h1>{d.title.split('（')[0]}{d.title.includes('（') && <span class="h1-sub">（{d.title.split('（').slice(1).join('（')}</span>}</h1>
       <p class="lead">{d.short}</p>
     </div>
 
@@ -55,8 +55,8 @@ const d = entry.data;
     )}
     {d.diagram === 'morido' && (
       <section class="diagram">
-        <h2>図解: 盛土規制法の対象になる規模の目安</h2>
-        <MoridoMap />
+        <h2>あなたの計画は、盛土規制法の対象？</h2>
+        <MoridoGuide />
       </section>
     )}
     {d.diagram === 'zone' && (
