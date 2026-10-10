@@ -1,7 +1,7 @@
 ---
 // 調査から許可まで（オールインワン）。Figma案 ver0.2 の文言が正・2026-10-10
-import V2 from '../../layouts/V2.astro';
-import { site } from '../../data/site';
+import V2 from '../layouts/Base.astro';
+import { site } from '../data/site';
 
 const fit = [
   { t: '調整区域で建てる・建て替える', s: '43条許可・60条証明' },
@@ -36,7 +36,7 @@ const faq = [
 ];
 ---
 <V2 title="調査から許可まで" description="許可の申請に使う現況図を、3Dスキャナで測るところから当事務所で作り、図面と申請まで進めます。岐阜・愛知・三重。">
-  <p class="v2-crumb"><a href="/v2/">トップ</a> ／ 調査から許可まで</p>
+  <p class="v2-crumb"><a href="/">トップ</a> ／ 調査から許可まで</p>
   <section class="v2-phero">
     <div>
       <p class="v2-lbl">ONE STOP</p>

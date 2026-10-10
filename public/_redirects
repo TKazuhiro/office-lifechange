@@ -10,6 +10,12 @@
 /faq/                         /services/  301
 /faq                          /services/  301
 
+# 新デザインの試作URL（2026-10-10 に / と /onestop/ へ移した）
+/v2/onestop/                  /onestop/   301
+/v2/onestop                   /onestop/   301
+/v2/                          /           301
+/v2                           /           301
+
 # AI事務所-カレンダー読取（検証用のページ。トップへ）
 /ai%E4%BA%8B%E5%8B%99%E6%89%80-%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%E8%AA%AD%E5%8F%96/  /  301
 /ai事務所-カレンダー読取/     /           301
