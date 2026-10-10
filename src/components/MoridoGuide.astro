@@ -11,7 +11,7 @@ const works = [
   { pic: 'both', t: '盛土と切土を同時にして崖ができる', s: '合わせた高さで判定', a: '崖の高さ 2m 超', b1: '崖の高さ 2m 超', b2: '崖の高さ 5m 超' },
   { pic: 'gentle', t: '崖はできないが、盛土に高さがある', s: '緩い勾配で盛る場合', a: '盛土の高さ 2m 超', b1: '盛土の高さ 2m 超', b2: '盛土の高さ 5m 超' },
   { pic: 'area', t: '上のどれでもないが、面積が広い', s: '30cm以上の盛土など、役所が土地の形質変更と判断する場合', a: '500㎡ 超', b1: '500㎡ 超', b2: '3,000㎡ 超' },
-  { pic: 'pile', t: '土石を一時的に積んでおく', s: '資材置場・仮置きなど、あとで撤去するもの', a: '高さ 2m 超 または 面積 500㎡ 超', b1: '高さ 2m 超 または 面積 500㎡ 超', b2: '高さ 5m 超 かつ 1,500㎡ 超、または 面積 3,000㎡ 超' },
+  { pic: 'pile', t: '土石を一時的に積んでおく', s: '資材置場・仮置きなど、あとで撤去するもの', a: '高さ 2m 超 かつ 300㎡ 超、または 面積 500㎡ 超', b1: '高さ 2m 超 かつ 300㎡ 超、または 面積 500㎡ 超', b2: '高さ 5m 超 かつ 1,500㎡ 超、または 面積 3,000㎡ 超' },
 ];
 ---
 <section class="mg" aria-labelledby="mg-h">
@@ -36,7 +36,7 @@ const works = [
             {w.pic === 'fill' && (<><polygon points="8,56 8,22 66,22 100,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="66" y1="22" x2="100" y2="56" stroke="#8b5a3c" stroke-width="3" /></>)}
             {w.pic === 'cut' && (<><polygon points="8,56 8,22 44,22 78,56" fill="#efe8dc" stroke="#8b5a3c" /><polygon points="44,22 112,22 112,56 78,56" fill="none" stroke="#8b5a3c" stroke-dasharray="3 3" /><line x1="44" y1="22" x2="78" y2="56" stroke="#8b5a3c" stroke-width="3" /></>)}
             {w.pic === 'both' && (<><polygon points="8,56 8,40 44,40 44,24 82,24 106,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="82" y1="24" x2="106" y2="56" stroke="#8b5a3c" stroke-width="3" /></>)}
-            {w.pic === 'gentle' && (<><polygon points="8,56 26,24 94,24 112,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="8" y1="56" x2="112" y2="56" stroke="#8b5a3c" /></>)}
+            {w.pic === 'gentle' && (<><polygon points="4,56 50,36 70,36 116,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="8" y1="56" x2="112" y2="56" stroke="#8b5a3c" /></>)}
             {w.pic === 'area' && (<><rect x="14" y="14" width="92" height="40" fill="#f3ede3" stroke="#8b5a3c" stroke-dasharray="5 4" /><text x="60" y="40" font-size="13" text-anchor="middle" fill="#8b5a3c">面積</text></>)}
             {w.pic === 'pile' && (<><polygon points="22,56 40,22 80,22 98,56" fill="#d8d2c6" stroke="#6b6357" /><line x1="8" y1="56" x2="112" y2="56" stroke="#6b6357" /></>)}
           </svg>
