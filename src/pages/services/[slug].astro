@@ -32,13 +32,13 @@ const d = entry.data;
     )}
 
     <dl class="meta">
-      <div><dt>所要期間の目安</dt><dd>{d.period}</dd></div>
-      <div><dt>料金の考え方</dt><dd>{d.fee}</dd></div>
+      <div><dt>期間の目安</dt><dd>{d.period}</dd></div>
+      <div><dt>費用</dt><dd>調査の前は幅で、役所で調べたあとに確定した金額をお出しします（くわしくは下の「費用はどう決まる？」）</dd></div>
     </dl>
 
     {d.steps.length > 0 && (
       <section class="flowbox">
-        <h2 class="flowbox__h">手続の流れ</h2>
+        <h2 class="flowbox__h">ひと目でわかる流れ</h2>
         <Flow steps={d.steps} />
       </section>
     )}
@@ -49,7 +49,7 @@ const d = entry.data;
 
     {d.diagram === 'drainage' && (
       <section class="diagram">
-        <h2>図解: 排水先で変わる付随手続</h2>
+        <h2>雨水をどこへ流すかで、要る手続きが変わります</h2>
         <DrainageMap />
       </section>
     )}
@@ -61,14 +61,14 @@ const d = entry.data;
     )}
     {d.diagram === 'zone' && (
       <section class="diagram">
-        <h2>図解: 区域と手続の関係</h2>
+        <h2>土地の区域で、要る手続きが変わります</h2>
         <ZoneMap />
       </section>
     )}
 
     <div class="note">
-      <strong>ご注意</strong>: 各制度の運用（必要書類・審査期間・手数料・立地基準の当てはめ）は<strong>自治体によって異なります</strong>。
-      このページの内容は一般的な流れと当事務所の実績に基づく目安であり、個別の案件については役所調査のうえでご案内します。
+      手続きの細かい決まり（書類・審査の期間・手数料・基準の当てはめ方）は、<strong>自治体ごとに違います</strong>。
+      ここに書いたのは一般的な流れと、当事務所のこれまでの目安です。あなたの土地の場合は、役所で調べてからお伝えします。
     </div>
 
   </div>
