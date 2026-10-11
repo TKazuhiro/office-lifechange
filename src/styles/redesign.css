@@ -58,13 +58,13 @@ h1, h2, h3 { word-break: auto-phrase; }
 .v2-lead { font-size: 15px; line-height: 1.95; color: var(--body); margin-top: 20px; max-width: 46em; }
 
 /* 目的から選ぶカード */
-.v2-pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
-.v2-pcard { border-top: 1px solid var(--ink); padding-top: 24px; text-decoration: none; display: block; }
+.v2-pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; margin-top: 48px; }
+.v2-pcard { border-top: 1px solid var(--ink); padding-top: 24px; text-decoration: none; display: flex; flex-direction: column; }
 .v2-pcard .num { font-family: var(--mincho); font-size: 12px; color: var(--accent); letter-spacing: .24em; }
 .v2-pcard h3 { font-family: var(--mincho); font-size: 18px; line-height: 1.6; margin-top: 12px; font-weight: 500; }
 .v2-pcard p { font-size: 14px; line-height: 1.85; color: var(--body); margin-top: 12px; }
 .v2-pcard .rel { font-size: 12px; color: var(--sub); margin-top: 14px; line-height: 1.7; }
-.v2-pcard .more { font-size: 13px; margin-top: 18px; color: var(--accent); }
+.v2-pcard .more { font-size: 13px; margin-top: auto; padding-top: 18px; color: var(--accent); }
 .v2-pcard:hover h3 { color: var(--accent); }
 
 /* 工程 */
