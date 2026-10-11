@@ -14,7 +14,7 @@ import { works } from '../data/works';
       {works.map((w) => (
         <figure class="works__item">
           <img src={w.src} alt={w.alt} loading="lazy" width="1600" height="1200" />
-          <figcaption><strong>{w.cap}</strong><br /><span class="small">関係した手続: {w.kind}</span></figcaption>
+          <figcaption><strong>{w.cap}</strong><br /><span class="small">関係した手続き:{w.kind}</span></figcaption>
         </figure>
       ))}
     </div>

@@ -87,5 +87,9 @@ dialog.zoom .zoom__tip { position: fixed; top: 1rem; left: 1rem; color: #fff; fo
   .wrap h2 { font-size: 1.2rem; }
   .page-head { padding-top: 28px; }
   .wrap table { font-size: .88rem; }
-  .wrap th { white-space: normal; }
+  .wrap th { white-space: normal; min-width: 5em; }
+  /* 項目名と内容の2列表（事務所概要など）は、スマホでは項目名を上に積む（項目名の列が1文字幅に潰れるのを防ぐ） */
+  .wrap table.kv, .wrap table.kv tbody, .wrap table.kv tr, .wrap table.kv th, .wrap table.kv td { display: block; width: auto; }
+  .wrap table.kv th { border-bottom: 0; padding: .8em 0 0; font-size: .8rem; color: var(--sub); }
+  .wrap table.kv td { padding: .2em 0 .8em; }
 }
