@@ -13,7 +13,9 @@ const services = defineCollection({
     period: z.string(), // 所要期間の目安
     fee: z.string(), // 料金の考え方（金額は書かない）
     steps: z.array(z.object({ title: z.string(), note: z.string().optional() })).default([]), // 手続の流れ図
-    diagram: z.enum(['drainage', 'zone', 'morido', 'site']).optional(), // 本文の後に出す図解
+    diagram: z.enum(['drainage', 'zone', 'morido', 'site', 'land']).optional(), // 本文の後に出す図解（land＝造成の3場面だけ）
+    related: z.array(z.object({ label: z.string(), href: z.string(), note: z.string().optional() })).default([]), // 図解のあとに出す関連の手続き
+    relatedTitle: z.string().optional(),
     image: z.string().optional(), // ページ上部のイメージ画像（/images/services/*.jpg。AI生成はキャプションに明記）
     imageAlt: z.string().optional(),
     summary: z.string(), // meta description

@@ -51,14 +51,20 @@ const d = entry.data;
 
     {d.diagram === 'drainage' && (
       <section class="diagram">
-        <h2>排水先も、一緒に確かめます</h2>
+        <h2>雨水と汚水は、どこへ流しますか？</h2>
         <DrainageMap list={entry.id !== 'senyo'} />
       </section>
     )}
     {d.diagram === 'site' && (
       <section class="diagram">
-        <h2>田んぼを宅地にする前に、確かめる場所</h2>
+        <h2>田んぼを宅地にする前に、どこを確かめる？</h2>
         <SiteCheck />
+      </section>
+    )}
+    {d.diagram === 'land' && (
+      <section class="diagram">
+        <h2>どんな造成をしますか？</h2>
+        <LandScenes />
       </section>
     )}
     {d.diagram === 'morido' && (<>
@@ -75,6 +81,13 @@ const d = entry.data;
       <section class="diagram">
         <h2>土地の区域で、必要な手続きが変わります</h2>
         <ZoneMap />
+      </section>
+    )}
+
+    {d.related.length > 0 && (
+      <section class="related">
+        <h2>{d.relatedTitle ?? '一緒に必要になることが多い手続き'}</h2>
+        <ul>{d.related.map((r) => <li><a href={r.href}>{r.label}</a>{r.note && <> — {r.note}</>}</li>)}</ul>
       </section>
     )}
 
@@ -95,4 +108,5 @@ const d = entry.data;
   .meta dd { margin: 0; font-weight: 400; }
   .flowbox { margin: 0 0 2rem; }
   .flowbox__h { margin-top: 0; }
+  .related { max-width: 800px; }
 </style>
