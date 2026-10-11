@@ -1,0 +1,49 @@
+---
+/** 田んぼを宅地にする前に確かめる4か所（2026-10-11 Codex 作画・Claude 精査済み）。
+ *  番号はスマホ幅（絵の幅 約346px）でも約12pxになるよう r=52・文字48 */
+const marks = [
+  { n: 1, cx: 1100, cy: 1080, d: 'M1048 1080 L990 1080' },
+  { n: 2, cx: 735, cy: 1045, d: 'M686 1028 L650 1015' },
+  { n: 3, cx: 395, cy: 855, d: 'M343 855 L305 855' },
+  { n: 4, cx: 770, cy: 700, d: 'M718 700 L680 700' },
+];
+const items = [
+  { t: '道路から入れるか', d: '出入りする場所と、道路の幅を確かめます。' },
+  { t: '水はどこへ流れるか', d: '用水路のつながりや高さ、管理者を調べます。' },
+  { t: '隣の土地との高低差', d: '畦畔や周りの土地の高さを測ります。' },
+  { t: 'どこまで造成するか', d: '家や駐車場の位置から、土を入れる範囲を考えます。' },
+];
+---
+<div class="sc">
+  <figure class="sc-fig">
+    <svg viewBox="0 180 1376 1160" role="img" aria-labelledby="sc-title" xmlns="http://www.w3.org/2000/svg">
+      <title id="sc-title">田んぼを宅地にする前に確かめる4か所（1 道路、2 用水路、3 隣の土地との境の畦畔、4 造成する範囲）</title>
+      <image href="/images/diagrams/site-before.webp" width="1376" height="1536" />
+      <g class="sc-marks">
+        {marks.map((m) => (<g><path d={m.d} /><circle cx={m.cx} cy={m.cy} r="52" /><text x={m.cx} y={m.cy + 2}>{m.n}</text></g>))}
+      </g>
+    </svg>
+    <figcaption>造成前のイメージ。番号は確かめる場所の例です。</figcaption>
+  </figure>
+  <ol class="sc-list">
+    {items.map((it, i) => (<li><span class="sc-n">{String(i + 1).padStart(2, '0')}</span><div><p class="sc-t">{it.t}</p><p class="sc-d">{it.d}</p></div></li>))}
+  </ol>
+</div>
+<p class="sc-cap">用水路があっても、そのまま排水先にできるとは限りません。使い方や工事の条件を管理者に確かめます。</p>
+
+<style>
+  .sc { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr); gap: 32px; align-items: center; margin: 1.5rem 0 .5rem; }
+  .sc-fig { margin: 0; min-width: 0; }
+  .sc-fig svg { display: block; width: 100%; height: auto; }
+  .sc-fig figcaption { font-size: .8rem; color: var(--sub); }
+  .sc-marks path { fill: none; stroke: var(--accent); stroke-width: 3; }
+  .sc-marks circle { fill: #fff; stroke: var(--accent); stroke-width: 3; }
+  .sc-marks text { font: 48px var(--gothic); fill: var(--accent); text-anchor: middle; dominant-baseline: middle; }
+  .sc-list { list-style: none; margin: 0; padding: 0; }
+  .sc-list li { display: flex; gap: 16px; border-top: 1px solid var(--line); padding: 16px 0; }
+  .sc-n { font-size: .75rem; letter-spacing: .14em; color: var(--accent); padding-top: .35em; flex: none; }
+  .sc-t { font-family: var(--mincho); font-size: 1.05rem; color: var(--ink); margin: 0; }
+  .sc-d { font-size: .875rem; color: var(--sub); margin: .2em 0 0; }
+  .sc-cap { font-size: .875rem; color: var(--sub); margin: .5rem 0 2rem; }
+  @media (max-width: 760px) { .sc { grid-template-columns: 1fr; gap: 16px; } }
+</style>

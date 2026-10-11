@@ -1,0 +1,97 @@
+---
+/** 造成の3場面（造成前／造成後）。2026-10-11 Codex 作画・Claude 精査済み（Claude精査結果_第2回）。
+ *  PC は左右並び、540px 以下は radio の切替（JavaScript なし）。規模の基準は MoridoGuide 側で示し、ここでは置き換えない */
+const base = '/images/diagrams/';
+const scenes = [
+  {
+    id: 'fill', t: '田んぼを埋めて、宅地にする',
+    before: '01-fill-anime-v6-before.webp', after: '01-fill-anime-v6-after.webp',
+    altB: '畦畔で囲まれた田んぼと、道路沿いの用水路', altA: '手前の田んぼに土を入れて宅地にしたイメージ。前面の用水路だけ蓋を掛けている',
+    cap: 'もともとの用水路は残し、造成する区画の前面だけ蓋を掛けたイメージです。',
+  },
+  {
+    id: 'cut', t: '崖を削って、平らな土地を広げる',
+    before: '02-cut-anime-before.webp', after: '02-cut-anime-after.webp',
+    altB: '道路沿いの高い斜面', altA: '斜面を削って平らな場所を広げたイメージ',
+    cap: '高い部分を削り、家を建てるための平らな場所をつくります。',
+  },
+  {
+    id: 'cutfill', t: '高い所を削り、低い所を埋める',
+    before: '03-cut-fill-anime-v3-before.webp', after: '03-cut-fill-anime-v3-after.webp',
+    altB: '道路に沿った、高低差のある土地', altA: '高い側を削り、低い側を埋めた宅地。出入口は右奥の道路側',
+    cap: '奥の高い側を削り、手前の低い側に土を入れています。①は出入口で、右奥の道路側です。',
+    entrance: true,
+  },
+];
+---
+<div class="ls">
+  {scenes.map((s, i) => (
+    <article class="ls-scene">
+      <h3 class="ls-t"><span class="ls-n">{String(i + 1).padStart(2, '0')}</span>{s.t}</h3>
+      <fieldset class="ls-ctl">
+        <legend class="ls-legend">{s.t}：表示の切替</legend>
+        <input class="ls-b" type="radio" name={`ls-${s.id}`} id={`ls-${s.id}-b`} checked />
+        <label for={`ls-${s.id}-b`}>造成前</label>
+        <input class="ls-a" type="radio" name={`ls-${s.id}`} id={`ls-${s.id}-a`} />
+        <label for={`ls-${s.id}-a`}>造成後</label>
+        <div class="ls-panels">
+          <figure class="ls-p ls-p--b">
+            <figcaption>造成前</figcaption>
+            <img src={base + s.before} alt={s.altB} width="1100" height="1228" loading="lazy" />
+          </figure>
+          <figure class="ls-p ls-p--a">
+            <figcaption>造成後のイメージ</figcaption>
+            <div class="ls-img">
+              <img src={base + s.after} alt={s.altA} width="1100" height="1228" loading="lazy" />
+              {s.entrance && (
+                <svg class="ls-mark" viewBox="0 0 1376 1536" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <path d="M1040 555 L890 590" />
+                  <circle cx="1040" cy="555" r="52" />
+                  <text x="1040" y="557">1</text>
+                </svg>
+              )}
+            </div>
+          </figure>
+        </div>
+      </fieldset>
+      <p class="ls-cap">{s.cap}</p>
+    </article>
+  ))}
+  <p class="ls-note">絵は土地の変わり方を伝えるためのイメージで、工事の基準や構造を示すものではありません。必要な手続きは、場所と工事の規模から確かめます。</p>
+</div>
+
+<style>
+  .ls { margin: 1.5rem 0 2.5rem; }
+  .ls-scene { margin: 0 0 2.5rem; }
+  .ls-t { font-family: var(--mincho); font-size: 1.15rem; font-weight: 500; margin: 0 0 .8rem; display: flex; gap: .8rem; align-items: baseline; }
+  .ls-n { font-size: .75rem; letter-spacing: .14em; color: var(--accent); }
+  .ls-ctl { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .ls-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .ls-ctl > input, .ls-ctl > label { display: none; }
+  .ls-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .ls-p { margin: 0; min-width: 0; }
+  .ls-p figcaption { font-size: .8rem; color: var(--sub); margin-bottom: 6px; }
+  /* 絵の上下の白い余白を約12%ずつ切る（番号の重ね絵は preserveAspectRatio slice で同じ切り方） */
+  .ls-p img { width: 100%; height: auto; display: block; aspect-ratio: 1100 / 935; object-fit: cover; }
+  .ls-img { position: relative; }
+  .ls-mark { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .ls-mark path { fill: none; stroke: var(--accent); stroke-width: 3; }
+  .ls-mark circle { fill: #fff; stroke: var(--accent); stroke-width: 3; }
+  .ls-mark text { font: 48px var(--gothic); fill: var(--accent); text-anchor: middle; dominant-baseline: middle; }
+  .ls-cap { font-size: .875rem; color: var(--sub); margin: .6rem 0 0; }
+  .ls-note { font-size: .8rem; color: var(--sub); }
+  @media (max-width: 540px) {
+    .ls-ctl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 8px; position: relative; }
+    .ls-ctl > input { display: block; position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .ls-ctl > label { display: block; cursor: pointer; border: 1px solid var(--line); padding: 10px 14px; text-align: center; font-size: .875rem; min-height: 44px; }
+    .ls-ctl > input:checked + label { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .ls-ctl > input:focus-visible + label { outline: 2px solid var(--ink); outline-offset: 3px; }
+    .ls-panels { display: block; grid-column: 1 / -1; }
+    .ls-b:checked ~ .ls-panels > .ls-p--a, .ls-a:checked ~ .ls-panels > .ls-p--b { display: none; }
+  }
+  @media print {
+    .ls-ctl > input, .ls-ctl > label { display: none; }
+    .ls-panels { display: grid !important; grid-template-columns: 1fr 1fr; }
+    .ls-p { display: block !important; }
+  }
+</style>

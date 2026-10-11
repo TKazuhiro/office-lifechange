@@ -4,6 +4,8 @@ import Flow from '../../components/Flow.astro';
 import DrainageMap from '../../components/DrainageMap.astro';
 import ZoneMap from '../../components/ZoneMap.astro';
 import MoridoGuide from '../../components/MoridoGuide.astro';
+import LandScenes from '../../components/LandScenes.astro';
+import SiteCheck from '../../components/SiteCheck.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -49,16 +51,26 @@ const d = entry.data;
 
     {d.diagram === 'drainage' && (
       <section class="diagram">
-        <h2>雨水をどこへ流すかで、必要な手続きが変わります</h2>
-        <DrainageMap />
+        <h2>排水先も、一緒に確かめます</h2>
+        <DrainageMap list={entry.id !== 'senyo'} />
       </section>
     )}
-    {d.diagram === 'morido' && (
+    {d.diagram === 'site' && (
+      <section class="diagram">
+        <h2>田んぼを宅地にする前に、確かめる場所</h2>
+        <SiteCheck />
+      </section>
+    )}
+    {d.diagram === 'morido' && (<>
+      <section class="diagram">
+        <h2>どんな造成をしますか？</h2>
+        <LandScenes />
+      </section>
       <section class="diagram">
         <h2>あなたの計画は、盛土規制法の対象？</h2>
         <MoridoGuide />
       </section>
-    )}
+    </>)}
     {d.diagram === 'zone' && (
       <section class="diagram">
         <h2>土地の区域で、必要な手続きが変わります</h2>
