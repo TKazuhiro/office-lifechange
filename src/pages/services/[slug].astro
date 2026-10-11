@@ -73,8 +73,9 @@ const d = entry.data;
         <LandScenes />
       </section>
       <section class="diagram">
-        <h2>あなたの計画は、盛土規制法の対象？</h2>
+        <h2>どれくらいの規模から、盛土規制法の対象になる？</h2>
         <MoridoGuide />
+        <p class="ask">ここに載せたのは目安です。当てはまるか分からないときは、<a href="/contact/">地番だけでもご相談ください</a>。役所で確かめてからお答えします。</p>
       </section>
     </>)}
     {d.diagram === 'zone' && (
@@ -108,4 +109,5 @@ const d = entry.data;
   .flowbox { margin: 0 0 2rem; }
   .flowbox__h { margin-top: 0; }
   .related { max-width: 800px; }
+  .wrap .ask { font-size: .95rem; color: var(--ink); margin-top: -1rem; }
 </style>
