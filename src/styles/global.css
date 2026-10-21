@@ -31,7 +31,7 @@
 .wrap ul, .wrap ol { padding-left: 1.4em; margin: 0 0 1.2em; color: var(--body); }
 .wrap li { margin-bottom: .4em; line-height: 1.9; }
 .wrap strong { font-weight: 500; color: var(--ink); }
-.wrap table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: .95rem; }
+.wrap table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 15px; }
 .wrap th, .wrap td { border-bottom: 1px solid var(--line); padding: .8em .6em; text-align: left; vertical-align: top; line-height: 1.8; }
 .wrap th { white-space: nowrap; font-weight: 500; color: var(--ink); width: 1%; }
 .wrap blockquote { margin: 1.2em 0; padding: .2em 0 .2em 1.1em; border-left: 2px solid var(--accent); color: var(--body); }
@@ -40,7 +40,7 @@
 .wrap .breadcrumb a { color: var(--sub); text-decoration: none; }
 .page-head { padding: 48px 0 16px; }
 .page-head h1 { margin-bottom: .4em; }
-.page-head h1 .h1-sub { display: block; font-size: .55em; color: var(--sub); letter-spacing: .06em; margin-top: .3em; }
+.page-head h1 .h1-sub { display: block; font-size: max(12px, .55em); color: var(--sub); letter-spacing: .06em; margin-top: .3em; }
 .wrap .lead { font-size: 15px; color: var(--body); max-width: 46em; }
 
 .tag { display: inline-block; font-family: var(--mincho); font-size: 12px; letter-spacing: .14em; color: var(--accent); background: none; border: 1px solid var(--accent); padding: .1em .7em; margin-right: .3em; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
@@ -48,7 +48,7 @@
 .wrap .small { color: var(--sub); }
 .eyebrow { display: inline-block; font-family: var(--mincho); font-size: 12px; letter-spacing: .24em; color: var(--accent); margin-bottom: .4em; }
 
-.btn { display: inline-block; padding: .9em 2em; border-radius: 0; background: var(--accent); color: #fff; text-decoration: none; letter-spacing: .08em; font-size: .92rem; border: 1px solid var(--accent); }
+.btn { display: inline-block; padding: .9em 2em; border-radius: 0; background: var(--accent); color: #fff; text-decoration: none; letter-spacing: .08em; font-size: 14px; border: 1px solid var(--accent); }
 .wrap .btn { color: #fff; }
 .btn:hover { opacity: .9; }
 .btn--ghost { background: transparent; color: var(--accent); }
@@ -66,7 +66,7 @@ a.card .tag { align-self: flex-start; }
 .card h3 { margin-top: 0; }
 .card .more { color: var(--accent); font-size: 13px; margin-top: auto; padding-top: .8em; }
 
-.note { background: var(--mist); border-left: 2px solid var(--ink); padding: 1.1em 1.3em; margin: 2em 0; font-size: .95rem; line-height: 1.9; color: var(--body); }
+.note { background: var(--mist); border-left: 2px solid var(--ink); padding: 1.1em 1.3em; margin: 2em 0; font-size: 15px; line-height: 1.9; color: var(--body); }
 .note strong { color: var(--ink); }
 
 /* 図解のクリック拡大 */

@@ -25,12 +25,14 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
           <a class="card svc" href={`/services/${s.id}/`}>
             <div class="svc__head">
               <span class="tag">{s.data.law}</span>
-              <h2>{main}{rest.length > 0 && <span class="svc__sub">（{rest.join('（')}</span>}</h2>
+              <h2>{main}</h2>
+              {rest.length > 0 && <p class="svc__sub">（{rest.join('（')}</p>}
               <p>{s.data.short}</p>
             </div>
             <dl class="svc__meta">
               <div><dt>期間の目安</dt><dd>{s.data.period}</dd></div>
-              <div><dt>費用の決まり方</dt><dd>{s.data.fee}</dd></div>
+              {/* 金継ぎ 10/21: 3文がひと固まりでスマホで5行になるので、文ごとに改行 */}
+              <div><dt>費用の決まり方</dt><dd>{s.data.fee.split('。').filter(Boolean).map((t, i, a) => <>{t}{i < a.length - 1 || s.data.fee.endsWith('。') ? '。' : ''}{i < a.length - 1 && <br />}</>)}</dd></div>
             </dl>
             <span class="more">詳しく見る →</span>
           </a>
@@ -48,9 +50,9 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 <style>
   .list { display: grid; gap: 1.2rem; margin-top: 1.5rem; }
   .svc h2 { border: 0; padding: 0; margin: .2em 0 .3em; font-size: 1.25rem; }
-  .svc__sub { display: block; font-size: .7em; color: var(--sub); letter-spacing: .06em; }
   .svc p { margin-bottom: .6em; }
+  .wrap .svc__sub { font-size: 14px; color: var(--sub); letter-spacing: .06em; margin: -.2em 0 .5em; }
   .svc__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .6rem 1.5rem; margin: .8em 0; padding-top: .8em; border-top: 1px dashed var(--line); }
   .svc__meta dt { font-size: .875rem; color: var(--muted); }
-  .svc__meta dd { margin: 0; font-size: .95rem; line-height: 1.8; }
+  .svc__meta dd { margin: 0; font-size: .9375rem; line-height: 1.8; }
 </style>

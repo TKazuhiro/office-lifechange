@@ -63,14 +63,14 @@ const scenes = [
 <style>
   .ls { margin: 1.5rem 0 2.5rem; }
   .ls-scene { margin: 0 0 2.5rem; }
-  .ls-t { font-family: var(--mincho); font-size: 1.15rem; font-weight: 500; margin: 0 0 .8rem; display: flex; gap: .8rem; align-items: baseline; }
+  .ls-t { font-family: var(--mincho); font-size: 1.125rem; font-weight: 500; margin: 0 0 .8rem; display: flex; gap: .8rem; align-items: baseline; }
   .ls-n { font-size: .75rem; letter-spacing: .14em; color: var(--accent); }
   .ls-ctl { border: 0; padding: 0; margin: 0; min-width: 0; }
   .ls-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .ls-ctl > input, .ls-ctl > label { display: none; }
   .ls-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .ls-p { margin: 0; min-width: 0; }
-  .ls-p figcaption { font-size: .8rem; color: var(--sub); margin-bottom: 6px; }
+  .ls-p figcaption { font-size: .75rem; color: var(--sub); margin-bottom: 6px; }
   /* 絵の上下の白い余白を約12%ずつ切る（番号の重ね絵は preserveAspectRatio slice で同じ切り方） */
   .ls-p img { width: 100%; height: auto; display: block; aspect-ratio: 1100 / 935; object-fit: cover; }
   .ls-img { position: relative; }
@@ -79,7 +79,7 @@ const scenes = [
   .ls-mark circle { fill: #fff; stroke: var(--accent); stroke-width: 3; }
   .ls-mark text { font: 48px var(--gothic); fill: var(--accent); text-anchor: middle; dominant-baseline: middle; }
   .ls-cap { font-size: .875rem; color: var(--sub); margin: .6rem 0 0; }
-  .ls-note { font-size: .8rem; color: var(--sub); }
+  .ls-note { font-size: .75rem; color: var(--sub); }
   @media (max-width: 540px) {
     .ls-ctl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 8px; position: relative; }
     .ls-ctl > input { display: block; position: absolute; opacity: 0; width: 1px; height: 1px; }
