@@ -13,11 +13,18 @@ const purposes = [
   { n: '05', t: '排水管や出入口をつなぎたい', d: '道路の側溝や水路に排水管をつなぐとき、道路から敷地への入口をつくるとき。', rel: '道路・水路の占用許可／河川法', href: '/services/senyo/' },
   { n: '06', t: '申請に使う図面や土量が必要', d: '許可の申請に添える現況図と土量計算を、3Dスキャナで測ってお作りします。', rel: '現況調査（3D計測併用）・設計', href: '/onestop/' },
 ];
+// アイコンは調査ページ（onestop）と同じ
 const steps = [
-  { t: '現況調査', d: '3Dスキャナで敷地を計測し、高さと形を記録します。' },
-  { t: '図面・設計', d: '現況図・造成計画・排水計画の図面をまとめます。' },
-  { t: '協議・申請', d: '役所に前もって相談し、その自治体の決まりに合わせて申請書をつくって出します。' },
-  { t: '許可・完了', d: '許可が出たあとの届出や、工事が終わったあとの検査まで付き添います。' },
+  { t: '現況調査', d: '3Dスキャナで敷地を計測し、高さと形を記録します。', icon: 'M8 37h32M24 19v18M24 24L14 37m10-13 10 13M17 11h14v8H17zM8 8v7m0-7h7m25 0h-7m7 0v7M8 28v-7m32 7v-7' },
+  { t: '図面・設計', d: '現況図・造成計画・排水計画の図面をまとめます。', icon: 'M11 5h22l5 5v33H11zM32 5v7h6M17 34V23l8-6 8 6v11zM17 34h16M23 34v-8h5v8' },
+  { t: '協議・申請', d: '役所に前もって相談し、その自治体の決まりに合わせて申請書をつくって出します。', icon: 'M7 8h27v20H19l-8 7v-7H7zM18 35h13l7 6v-6h4V17h-5M13 15h15M13 21h10' },
+  { t: '許可・完了', d: '許可が出たあとの届出や、工事が終わったあとの検査まで付き添います。', icon: 'M10 5h25v38H10zM16 13h13M16 19h13M16 29l5 5 10-11' },
+];
+// 実際の現況調査の流れ（2026-10 の現場。地名・座標・ファイル名は写さない）
+const trio = [
+  { src: '/images/v2/top-genchi-2026q4.jpg', alt: '現況調査をした敷地。平屋の住宅と芝生の庭', cap: '現地' },
+  { src: '/images/v2/top-pointcloud-2026q4.jpg', alt: '3Dスキャナで測った同じ敷地の点群', cap: '3Dスキャナで測った点群' },
+  { src: '/images/v2/top-trendpoint-2026q4.jpg', alt: '点群に写真を重ねて、図面の元にする画面', cap: '点群に写真を重ね、図面の元にします' },
 ];
 const laws = [
   { t: '都市計画法 29条（開発許可）', href: '/services/kaihatsu-kyoka/' },
@@ -64,10 +71,19 @@ const laws = [
     <p class="v2-lbl">ALL IN ONE</p>
     <h2 class="v2-h2">調査から申請まで、一貫してお任せください。</h2>
     <p class="v2-lead">現地の調査も、申請に使う図面も、役所への申請も。当事務所がまとめて受け持つ、オールインワンの事務所です。最初にお話しした担当が、変わることなく最後までご一緒します。だから「いまどこまで進んで、何を待っているのか」を、いつでもすぐにお答えできます。</p>
+    <div class="v2-trio">
+      {trio.map((f, i) => (
+        <figure>
+          <img src={f.src} alt={f.alt} width="1200" height="800" loading="lazy" />
+          <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{f.cap}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="v2-cap" style="margin-left:0">写真と画面：当事務所が現況調査を担当した敷地（色調整。ソフトの画面は描画部分だけを切り出しています）</p>
     <div class="v2-sgrid">
       {steps.map((s, i) => (
         <div class="v2-step">
-          <div class="v2-ph">点群・図面の画像<br />（来週の現場から差し替え）</div>
+          <svg class="v2-sicon" viewBox="0 0 48 48" aria-hidden="true"><path d={s.icon} /></svg>
           <p class="n">STEP {i + 1}</p>
           <h3>{s.t}</h3>
           <p>{s.d}</p>
