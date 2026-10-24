@@ -1,72 +1,73 @@
 ---
-/** 排水先による付随手続の分岐図 */
+/** 排水先の確認（雨水と汚水を分ける）。2026-10-11 Codex 案を Claude 精査のうえ移植。
+ *  放流先と必要な許可を一対一に結ばない（確認する内容を並べる図）。
+ *  list=false で「水路や管を使うときに確認すること」を省く（占用ページは本文に同じ表がある） */
+interface Props { list?: boolean }
+const { list = true } = Astro.props;
+const dests = [
+  ['道路の側溝・水路、河川', '管理者と接続の条件'],
+  ['農業用の水路', '土地改良区などの管理者と利用の条件'],
+  ['里道・水路などの公共用地', '土地や施設の管理者と使い方の条件'],
+  ['公共下水道', '使える区域と接続の条件'],
+  ['ほかの方の管・土地', '所有者と使用の承諾'],
+];
 ---
-<figure class="drain" data-zoom>
-  <svg viewBox="0 0 900 400" role="img" aria-labelledby="drain-title drain-desc" xmlns="http://www.w3.org/2000/svg">
-    <title id="drain-title">雨水・汚水の放流先による付随手続の分岐</title>
-    <desc id="drain-desc">敷地からの排水を、市道・県道の側溝につなぐなら道路占用許可や道路自費工事承認、里道・水路につなぐなら法定外公共物の占用許可、土地改良区の用排水路につなぐなら用排水路作業許可、河川につなぐなら河川法の許可、他人の私設管につなぐなら排水同意が必要になる。</desc>
-    <defs>
-      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#b8912e"/>
-      </marker>
-    </defs>
-
-    <!-- 敷地 -->
-    <rect x="30" y="140" width="190" height="120" rx="12" fill="#e9eff6" stroke="#1f3a5f" stroke-width="2"/>
-    <polygon points="95,178 125,152 155,178" fill="#1f3a5f"/>
-    <rect x="103" y="178" width="44" height="34" fill="#1f3a5f"/>
-    <text x="125" y="240" font-size="15" font-weight="800" fill="#162a45" text-anchor="middle">計画地（建築・造成）</text>
-    <text x="125" y="130" font-size="13" fill="#5f6770" text-anchor="middle">雨水・汚水はどこへ流す？</text>
-
-    <!-- 分岐線 -->
-    <g stroke="#b8912e" stroke-width="2.5" fill="none" marker-end="url(#arr)">
-      <path d="M220,200 C300,200 300,60 380,60"/>
-      <path d="M220,200 C300,200 300,130 380,130"/>
-      <path d="M220,200 C300,200 300,200 380,200"/>
-      <path d="M220,200 C300,200 300,270 380,270"/>
-      <path d="M220,200 C300,200 300,340 380,340"/>
-    </g>
-
-    <!-- 放流先 と 手続 -->
-    <g font-size="14">
-      <rect x="386" y="38" width="200" height="44" rx="8" fill="#fff" stroke="#c9d3df"/>
-      <text x="486" y="65" font-weight="700" fill="#162a45" text-anchor="middle">市道・県道の側溝</text>
-      <rect x="386" y="108" width="200" height="44" rx="8" fill="#fff" stroke="#c9d3df"/>
-      <text x="486" y="135" font-weight="700" fill="#162a45" text-anchor="middle">里道・水路（法定外公共物）</text>
-      <rect x="386" y="178" width="200" height="44" rx="8" fill="#fff" stroke="#c9d3df"/>
-      <text x="486" y="205" font-weight="700" fill="#162a45" text-anchor="middle">土地改良区の用排水路</text>
-      <rect x="386" y="248" width="200" height="44" rx="8" fill="#fff" stroke="#c9d3df"/>
-      <text x="486" y="275" font-weight="700" fill="#162a45" text-anchor="middle">河川</text>
-      <rect x="386" y="318" width="200" height="44" rx="8" fill="#fff" stroke="#c9d3df"/>
-      <text x="486" y="345" font-weight="700" fill="#162a45" text-anchor="middle">他人の私設管・私有地</text>
-    </g>
-    <g stroke="#8fa0b5" stroke-width="2" fill="none" marker-end="url(#arr)">
-      <line x1="586" y1="60" x2="620" y2="60"/><line x1="586" y1="130" x2="620" y2="130"/><line x1="586" y1="200" x2="620" y2="200"/><line x1="586" y1="270" x2="620" y2="270"/><line x1="586" y1="340" x2="620" y2="340"/>
-    </g>
-    <g font-size="13.5" fill="#1f3a5f">
-      <rect x="626" y="38" width="250" height="44" rx="8" fill="#f4f1e8"/>
-      <text x="751" y="58" text-anchor="middle" font-weight="700">道路占用許可</text>
-      <text x="751" y="75" text-anchor="middle">道路自費工事承認（県道は協議が増える）</text>
-      <rect x="626" y="108" width="250" height="44" rx="8" fill="#f4f1e8"/>
-      <text x="751" y="128" text-anchor="middle" font-weight="700">法定外公共物 占用等許可</text>
-      <text x="751" y="145" text-anchor="middle">自費工事許可（地元同意を伴うことも）</text>
-      <rect x="626" y="178" width="250" height="44" rx="8" fill="#f4f1e8"/>
-      <text x="751" y="198" text-anchor="middle" font-weight="700">用排水路作業許可</text>
-      <text x="751" y="215" text-anchor="middle">土地改良区へ申請</text>
-      <rect x="626" y="248" width="250" height="44" rx="8" fill="#f4f1e8"/>
-      <text x="751" y="268" text-anchor="middle" font-weight="700">河川法の許可（26条ほか）</text>
-      <text x="751" y="285" text-anchor="middle">河川管理者と事前協議</text>
-      <rect x="626" y="318" width="250" height="44" rx="8" fill="#f4f1e8"/>
-      <text x="751" y="338" text-anchor="middle" font-weight="700">汚水放流承諾・排水同意</text>
-      <text x="751" y="355" text-anchor="middle">所有者の承諾を取り付け</text>
-    </g>
-    <text x="30" y="388" font-size="12.5" fill="#5f6770">※ 手続の名称は自治体により異なります。放流先が確認できるまで要否は確定しないため、調査前の見積は幅でお伝えしています</text>
-  </svg>
-  <figcaption>雨水・汚水の放流先によって、本体の許可とは別に必要になる手続が変わります<span class="zoom-hint">（図をクリック／タップで拡大）</span></figcaption>
-</figure>
+<div class="dr">
+  <article class="dr-col">
+    <div class="dr-head">
+      <svg class="dr-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 25a8 8 0 0 1-1-16 11 11 0 0 1 21-1 8 8 0 1 1 3 17H12M15 32l-3 6m14-6-3 6m14-6-3 6" /></svg>
+      <div><p class="dr-k">雨水</p><p class="dr-t">屋根や敷地に降る雨</p></div>
+    </div>
+    <ol class="dr-route">
+      <li><span>01</span>周りの側溝・水路を調べる</li>
+      <li><span>02</span>つなぐ経路と高さを確かめる</li>
+      <li><span>03</span>管理者に条件を確かめる</li>
+    </ol>
+    <p class="dr-p">敷地から先のつながりまで調べて、排水の計画を考えます。</p>
+  </article>
+  <article class="dr-col">
+    <div class="dr-head">
+      <svg class="dr-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m5 22 19-16 19 16M10 19v23h28V19M20 42V28h8v14M17 21h3m9 0h3" /></svg>
+      <div><p class="dr-k">汚水</p><p class="dr-t">台所・お風呂・トイレの水</p></div>
+    </div>
+    <p class="dr-p dr-intro">公共下水道を使えるかを調べて、処理の方法を確かめます。</p>
+    <ul class="dr-choice">
+      <li><span>公共下水道を使う場合</span>つなぐ先と条件を確かめます。</li>
+      <li><span>浄化槽を使う場合</span>処理したあとの水の行き先を確かめます。</li>
+    </ul>
+  </article>
+</div>
+<p class="dr-cap">確かめる内容を並べた図です。現地の水の流れや、つなげる場所を示すものではありません。</p>
+{list && (
+  <details class="dr-more">
+    <summary>水路や管を使うときに確かめること</summary>
+    <ul>{dests.map(([a, b]) => <li><b>{a}</b><span>{b}</span></li>)}</ul>
+  </details>
+)}
 
 <style>
-  .drain { margin: 1.5rem 0 2rem; }
-  .drain svg { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
-  .drain figcaption { font-size: .82rem; color: var(--muted); margin-top: .5em; }
+  .dr { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin: 1.5rem 0 0; }
+  .dr-head { display: flex; align-items: center; gap: 18px; }
+  .dr-icon { width: 48px; height: 48px; flex: none; fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+  .dr-k { font-size: .75rem; letter-spacing: .14em; color: var(--accent); margin: 0; }
+  .dr-t { font-family: var(--mincho); font-size: 1.125rem; color: var(--ink); margin: 0; }
+  .dr-route, .dr-choice { list-style: none; padding: 0; margin: 1.2rem 0; }
+  .dr-route li, .dr-choice li { border-top: 1px solid var(--line); padding: .8rem 0; font-size: .9375rem; color: var(--ink); }
+  .dr-route li:last-child, .dr-choice li:last-child { border-bottom: 1px solid var(--line); }
+  .dr-route span { font-size: .75rem; letter-spacing: .14em; color: var(--accent); margin-right: 1rem; }
+  .dr-choice span { display: block; font-size: .75rem; color: var(--accent); margin-bottom: .2rem; }
+  .dr-p { font-size: .875rem; color: var(--sub); }
+  .dr-intro { margin-top: 1.2rem; }
+  .dr-cap { font-size: .75rem; color: var(--sub); margin: 1rem 0 0; }
+  .dr-more { margin: 1.2rem 0 2rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .dr-more summary { cursor: pointer; padding: .9rem 0; font-size: .9375rem; }
+  .dr-more ul { list-style: none; margin: 0; padding: 0 0 .8rem; }
+  .dr-more li { display: flex; justify-content: space-between; gap: 16px; padding: .5rem 0; font-size: .875rem; }
+  .dr-more b { font-weight: 500; }
+  .dr-more span { color: var(--sub); }
+  @media (max-width: 760px) {
+    .dr { grid-template-columns: 1fr; gap: 28px; }
+    .dr-more li { display: block; }
+    .dr-more span { display: block; }
+  }
 </style>

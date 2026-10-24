@@ -1,0 +1,89 @@
+---
+/** 盛土規制法: 対象になる規模の目安（質問形式の図解・2026-10-10 試作、10-11 見出しを「目安」に）。
+ *  数値は政令の基準の要約（土石の堆積は 2026-10-10 に「高さ2m超かつ300㎡超」を補正。旧 MoridoMap は 10-11 に削除）。表を工事の種類ごとのカードに分け、スマホでも横にはみ出さない */
+const zones = [
+  { key: 'a', name: '宅地造成等工事規制区域', note: '市街地や集落など、人家に近い区域', rule: '下の大きさを超えると「許可」' },
+  { key: 'b', name: '特定盛土等規制区域', note: '崩れたときに人家まで届くおそれがある区域', rule: '大きさに応じて「届出」か「許可」' },
+];
+const works = [
+  { pic: 'fill', t: '盛土をして崖ができる', s: '崖＝30度を超える斜面', a: '崖の高さ 1m 超', b1: '崖の高さ 1m 超', b2: '崖の高さ 2m 超' },
+  { pic: 'cut', t: '切土をして崖ができる', s: '地山を削る', a: '崖の高さ 2m 超', b1: '崖の高さ 2m 超', b2: '崖の高さ 5m 超' },
+  { pic: 'both', t: '盛土と切土を同時にして崖ができる', s: '合わせた高さで判定', a: '崖の高さ 2m 超', b1: '崖の高さ 2m 超', b2: '崖の高さ 5m 超' },
+  { pic: 'gentle', t: '崖はできないが、盛土に高さがある', s: '緩い勾配で盛る場合', a: '盛土の高さ 2m 超', b1: '盛土の高さ 2m 超', b2: '盛土の高さ 5m 超' },
+  { pic: 'area', t: '上のどれでもないが、面積が広い', s: '30cm以上の盛土など、役所が土地の形質変更と判断する場合', a: '500㎡ 超', b1: '500㎡ 超', b2: '3,000㎡ 超' },
+  { pic: 'pile', t: '土石を一時的に積んでおく', s: '資材置場・仮置きなど、あとで撤去するもの', a: '高さ 2m 超 かつ 300㎡ 超、または 面積 500㎡ 超', b1: '高さ 2m 超 かつ 300㎡ 超、または 面積 500㎡ 超', b2: '高さ 5m 超 かつ 1,500㎡ 超、または 面積 3,000㎡ 超' },
+];
+---
+<section class="mg" aria-labelledby="mg-h">
+  <h3 id="mg-h" class="mg-q"><span class="mg-n">1</span>その土地は、どちらの区域ですか？</h3>
+  <div class="mg-zones">
+    {zones.map((z) => (
+      <div class={`mg-zone mg-zone--${z.key}`}>
+        <p class="mg-zone__name">{z.name}</p>
+        <p class="mg-zone__note">{z.note}</p>
+        <p class="mg-zone__rule">{z.rule}</p>
+      </div>
+    ))}
+  </div>
+  <p class="mg-out">どちらの区域でもなければ、盛土規制法の許可・届出は必要ありません（ほかの法令の手続きが必要なことはあります）。区域は都道府県・市の地図で確かめます。</p>
+
+  <h3 class="mg-q"><span class="mg-n">2</span>どんな工事ですか？　ひとつでも当てはまれば対象です</h3>
+  <div class="mg-works">
+    {works.map((w) => (
+      <div class="mg-work">
+        <div class="mg-work__head">
+          <svg class="mg-pic" viewBox="0 0 120 64" aria-hidden="true">
+            {w.pic === 'fill' && (<><polygon points="8,56 8,22 66,22 100,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="66" y1="22" x2="100" y2="56" stroke="#8b5a3c" stroke-width="3" /></>)}
+            {w.pic === 'cut' && (<><polygon points="8,56 8,22 44,22 78,56" fill="#efe8dc" stroke="#8b5a3c" /><polygon points="44,22 112,22 112,56 78,56" fill="none" stroke="#8b5a3c" stroke-dasharray="3 3" /><line x1="44" y1="22" x2="78" y2="56" stroke="#8b5a3c" stroke-width="3" /></>)}
+            {w.pic === 'both' && (<><polygon points="8,56 8,40 44,40 44,24 82,24 106,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="82" y1="24" x2="106" y2="56" stroke="#8b5a3c" stroke-width="3" /></>)}
+            {w.pic === 'gentle' && (<><polygon points="4,56 50,36 70,36 116,56" fill="#e4d6c3" stroke="#8b5a3c" /><line x1="8" y1="56" x2="112" y2="56" stroke="#8b5a3c" /></>)}
+            {w.pic === 'area' && (<><rect x="14" y="14" width="92" height="40" fill="#f3ede3" stroke="#8b5a3c" stroke-dasharray="5 4" /><text x="60" y="40" font-size="13" text-anchor="middle" fill="#8b5a3c">面積</text></>)}
+            {w.pic === 'pile' && (<><polygon points="22,56 40,22 80,22 98,56" fill="#d8d2c6" stroke="#6b6357" /><line x1="8" y1="56" x2="112" y2="56" stroke="#6b6357" /></>)}
+          </svg>
+          <div>
+            <p class="mg-work__t">{w.t}</p>
+            <p class="mg-work__s">{w.s}</p>
+          </div>
+        </div>
+        <dl class="mg-work__rules">
+          <div class="mg-r mg-r--a"><dt>規制区域<span>許可</span></dt><dd>{w.a}</dd></div>
+          <div class="mg-r mg-r--b"><dt>特定盛土等規制区域<span>届出</span></dt><dd>{w.b1}</dd></div>
+          <div class="mg-r mg-r--b"><dt>特定盛土等規制区域<span>許可</span></dt><dd>{w.b2}</dd></div>
+        </dl>
+      </div>
+    ))}
+  </div>
+  <p class="mg-foot">※ 政令の基準を要約したものです。区域の範囲は都道府県ごとに違い、対象外になる工事もあります。最後は役所調査で確かめます。</p>
+</section>
+
+<style>
+  .mg { margin: 1.5rem 0 2.5rem; }
+  .mg-q { font-family: var(--mincho); font-size: 1.125rem; font-weight: 500; margin: 2rem 0 1rem; display: flex; align-items: center; gap: .7rem; }
+  .mg-q:first-child { margin-top: 0; }
+  .mg-n { display: inline-flex; width: 1.8em; height: 1.8em; align-items: center; justify-content: center; border: 1px solid var(--accent); color: var(--accent); font-size: .875rem; flex: 0 0 auto; }
+  .mg-zones { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .mg-zone { border-top: 2px solid var(--ink); padding: 14px 0 4px; }
+  .mg-zone--b { border-top-color: var(--accent); }
+  .mg-zone__name { font-weight: 500; color: var(--ink); margin: 0 0 .2em; }
+  .mg-zone__note { font-size: .875rem; margin: 0; }
+  .mg-zone__rule { font-size: .875rem; color: var(--ink); margin: .4em 0 0; }
+  .mg-out { font-size: .875rem; background: var(--mist); padding: .8em 1em; margin-top: 16px; }
+  .mg-works { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 24px; }
+  .mg-work { border-top: 1px solid var(--line); padding-top: 14px; }
+  .mg-work__head { display: flex; gap: 14px; align-items: center; }
+  .mg-pic { width: 96px; height: auto; flex: 0 0 96px; }
+  .mg-work__t { font-weight: 500; color: var(--ink); margin: 0; line-height: 1.6; }
+  .mg-work__s { font-size: .75rem; color: var(--sub); margin: .2em 0 0; line-height: 1.6; }
+  .mg-work__rules { margin: 12px 0 0; display: grid; gap: 6px; }
+  .mg-r { display: grid; grid-template-columns: 13em 1fr; gap: 8px; font-size: .875rem; align-items: baseline; }
+  .mg-r dt { color: var(--sub); }
+  .mg-r dt span { display: inline-block; margin-left: .5em; font-size: .75rem; padding: 0 .5em; border: 1px solid currentColor; }
+  .mg-r--a dt span { color: var(--ink); }
+  .mg-r--b dt span { color: var(--accent); }
+  .mg-r dd { margin: 0; color: var(--ink); font-weight: 500; }
+  .mg-foot { font-size: .75rem; color: var(--sub); margin-top: 18px; }
+  @media (max-width: 760px) {
+    .mg-zones, .mg-works { grid-template-columns: 1fr; }
+    .mg-r { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

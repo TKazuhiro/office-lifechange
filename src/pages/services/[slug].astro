@@ -3,7 +3,9 @@ import Base from '../../layouts/Base.astro';
 import Flow from '../../components/Flow.astro';
 import DrainageMap from '../../components/DrainageMap.astro';
 import ZoneMap from '../../components/ZoneMap.astro';
-import MoridoMap from '../../components/MoridoMap.astro';
+import MoridoGuide from '../../components/MoridoGuide.astro';
+import LandScenes from '../../components/LandScenes.astro';
+import SiteCheck from '../../components/SiteCheck.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -20,7 +22,7 @@ const d = entry.data;
     <p class="breadcrumb"><a href="/">ホーム</a> › <a href="/services/">業務一覧</a> › {d.title}</p>
     <div class="page-head">
       <span class="tag">{d.law}</span>
-      <h1>{d.title}</h1>
+      <h1>{d.title.split('（')[0]}{d.title.includes('（') && <span class="h1-sub">（{d.title.split('（').slice(1).join('（')}</span>}</h1>
       <p class="lead">{d.short}</p>
     </div>
 
@@ -32,13 +34,13 @@ const d = entry.data;
     )}
 
     <dl class="meta">
-      <div><dt>所要期間の目安</dt><dd>{d.period}</dd></div>
-      <div><dt>料金の考え方</dt><dd>{d.fee}</dd></div>
+      <div><dt>期間の目安</dt><dd>{d.period}</dd></div>
+      <div><dt>費用</dt><dd>調査の前は幅で、役所で調べたあとに確定した金額をお出しします（くわしくは下の「費用はどう決まる？」）</dd></div>
     </dl>
 
     {d.steps.length > 0 && (
       <section class="flowbox">
-        <h2 class="flowbox__h">手続の流れ</h2>
+        <h2 class="flowbox__h">ひと目でわかる流れ</h2>
         <Flow steps={d.steps} />
       </section>
     )}
@@ -49,33 +51,51 @@ const d = entry.data;
 
     {d.diagram === 'drainage' && (
       <section class="diagram">
-        <h2>図解: 排水先で変わる付随手続</h2>
-        <DrainageMap />
+        <h2>雨水と汚水は、どこへ流しますか？</h2>
+        <DrainageMap list={entry.id !== 'senyo'} />
       </section>
     )}
-    {d.diagram === 'morido' && (
+    {d.diagram === 'site' && (
       <section class="diagram">
-        <h2>図解: 盛土規制法の対象になる規模の目安</h2>
-        <MoridoMap />
+        <h2>田んぼを宅地にする前に、どこを確かめる？</h2>
+        <SiteCheck />
       </section>
     )}
+    {d.diagram === 'land' && (
+      <section class="diagram">
+        <h2>どんな造成をしますか？</h2>
+        <LandScenes />
+      </section>
+    )}
+    {d.diagram === 'morido' && (<>
+      <section class="diagram">
+        <h2>どんな造成をしますか？</h2>
+        <LandScenes />
+      </section>
+      <section class="diagram">
+        <h2>どれくらいの規模から、盛土規制法の対象になる？</h2>
+        <MoridoGuide />
+        <p class="ask">ここに載せたのは目安です。当てはまるか分からないときは、<a href="/contact/">地番だけでもご相談ください</a>。役所で確かめてからお答えします。</p>
+      </section>
+    </>)}
     {d.diagram === 'zone' && (
       <section class="diagram">
-        <h2>図解: 区域と手続の関係</h2>
+        <h2>土地の区域で、必要な手続きが変わります</h2>
         <ZoneMap />
       </section>
     )}
 
+    {d.related.length > 0 && (
+      <section class="related">
+        <h2>{d.relatedTitle ?? '一緒に必要になることが多い手続き'}</h2>
+        <ul>{d.related.map((r) => <li><a href={r.href}>{r.label}</a>{r.note && <> — {r.note}</>}</li>)}</ul>
+      </section>
+    )}
+
     <div class="note">
-      <strong>ご注意</strong>: 各制度の運用（必要書類・審査期間・手数料・立地基準の当てはめ）は<strong>自治体によって異なります</strong>。
-      このページの内容は一般的な流れと当事務所の実績に基づく目安であり、個別の案件については役所調査のうえでご案内します。
+      手続きの細かい決まり（書類・審査の期間・手数料・基準の当てはめ方）は、<strong>自治体ごとに違います</strong>。ここに書いたのは一般的な流れと、当事務所のこれまでの目安です。あなたの土地の場合は、役所で調べてからお伝えします。
     </div>
 
-    <div class="cta">
-      <h2>この手続についてのご相談</h2>
-      <p>自治体名・所在地・現況・ご予定をお知らせください。役所調査のうえ、お見積を提出します。</p>
-      <a class="btn" href="/contact/">お問い合わせフォームへ</a>
-    </div>
   </div>
 </Base>
 
@@ -84,8 +104,10 @@ const d = entry.data;
   .keyvisual img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); display: block; }
   .keyvisual figcaption { margin-top: .4rem; color: var(--muted); }
   .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; margin: 0 0 2rem; }
-  .meta dt { font-size: .8rem; color: var(--muted); }
+  .meta dt { font-size: .875rem; color: var(--muted); }
   .meta dd { margin: 0; font-weight: 400; }
   .flowbox { margin: 0 0 2rem; }
   .flowbox__h { margin-top: 0; }
+  .related { max-width: 800px; }
+  .wrap .ask { font-size: .9375rem; color: var(--ink); margin-top: -1rem; }
 </style>

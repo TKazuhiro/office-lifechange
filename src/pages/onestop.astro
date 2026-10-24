@@ -1,0 +1,105 @@
+---
+// 調査から許可まで（オールインワン）。Figma案 ver0.2 の文言が正・2026-10-10
+import V2 from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const fit = [
+  { t: '調整区域で建てる・建て替える', s: '43条許可・60条証明' },
+  { t: '宅地を造成する', s: '29条開発許可' },
+  { t: '盛土・切土をする', s: '盛土規制法' },
+  { t: '農地を転用する', s: '農地法5条・4条' },
+];
+const scope = [
+  { a: '現況調査（3D計測）', b: '敷地と周辺の高さ・形を3Dスキャナで記録します。', c: '当事務所' },
+  { a: '現況図・断面図', b: '計測データから、申請に使う現況図と断面図を作ります。', c: '当事務所' },
+  { a: '土量計算', b: '切土・盛土の量を計算書にまとめます。', c: '当事務所' },
+  { a: '造成計画・排水計画', b: '規模に応じて、宅地造成設計士として計画図を作ります。', c: '当事務所' },
+  { a: '役所調査・協議・申請', b: '自治体ごとの運用を確かめ、書類を作成・提出します。', c: '当事務所' },
+  { a: '境界確定・分筆・地積更正', b: '登記に関わる測量は、土地家屋調査士さんの業務です。', c: '土地家屋調査士さん' },
+];
+// アイコンは 2026-10-11 Codex 作画（点群・図面の実物がそろうまでの当座）
+const steps = [
+  { t: '現況調査', d: '3Dスキャナで敷地を計測し、高さと形を記録します。', icon: 'M8 37h32M24 19v18M24 24L14 37m10-13 10 13M17 11h14v8H17zM8 8v7m0-7h7m25 0h-7m7 0v7M8 28v-7m32 7v-7' },
+  { t: '図面・設計', d: '現況図・造成計画・排水計画の図面をまとめます。', icon: 'M11 5h22l5 5v33H11zM32 5v7h6M17 34V23l8-6 8 6v11zM17 34h16M23 34v-8h5v8' },
+  { t: '協議・申請', d: '役所に前もって相談し、その自治体の決まりに合わせて申請書をつくって出します。', icon: 'M7 8h27v20H19l-8 7v-7H7zM18 35h13l7 6v-6h4V17h-5M13 15h15M13 21h10' },
+  { t: '許可・完了', d: '許可が出たあとの届出や、工事が終わったあとの検査まで付き添います。', icon: 'M10 5h25v38H10zM16 13h13M16 19h13M16 29l5 5 10-11' },
+];
+const deliv = [
+  { t: '現況図', d: 'CAD・PDF。申請図面の下図になります。' },
+  { t: '断面図', d: '計画との高さの関係を示します。' },
+  { t: '土量計算書', d: '切土・盛土の量の根拠です。' },
+  { t: '点群ビューア', d: 'ご希望の方に。ブラウザで現場を立体で見られます。' },
+];
+const faq = [
+  { q: '土地家屋調査士さんの測量と、何が違いますか？', a: '当事務所が行うのは、許認可の図面に使うための現況調査です。境界を確定する測量や登記に関わる測量は行いません。境界が関わる案件は、土地家屋調査士さんと分担して進めます。' },
+  { q: '計測だけを頼むことはできますか？', a: '当事務所の現況調査は、土地の許認可や造成計画のために行うものです。計測だけのご依頼はお受けしていません。' },
+  { q: '調査の前に、費用はどのくらいか分かりますか？', a: '調査の前は幅でお伝えし、役所調査と現況調査のあとに確定します。許認可の見積と同じ1枚にまとめます。' },
+];
+---
+<V2 title="調査から許可まで" description="許可の申請に使う現況図を、3Dスキャナで測るところから当事務所で作り、図面と申請まで進めます。岐阜・愛知・三重。">
+  <p class="v2-crumb"><a href="/">トップ</a> ／ 調査から許可まで</p>
+  <section class="v2-phero">
+    <div>
+      <p class="v2-lbl">ALL IN ONE</p>
+      <h1>調査から許可まで、<br />一貫してお受けします。</h1>
+      <p class="v2-lead">許可の申請には、今の土地の形を描いた「現況図」が必要です。これまでは別の業者さんに測ってもらい、図面ができるのを待つことがよくありました。</p>
+      <p class="v2-lead" style="margin-top:12px">当事務所なら、3Dスキャナで現地を測るところから、図面、申請まで、ひとつの事務所で済みます。最初にお話しした担当が、変わることなく最後までご一緒します。</p>
+    </div>
+    <figure>
+      <img src="/images/v2/tarui-2026q4.jpg" alt="擁壁で囲まれた、造成を終えた土地" width="1400" height="1050" />
+      <figcaption class="v2-cap" style="margin:10px 0 0;text-align:right">写真：当事務所が許認可申請を担当した造成地（色調整）</figcaption>
+    </figure>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">FOR</p>
+    <h2 class="v2-h2">こんな計画のときに</h2>
+    <div class="v2-fit">{fit.map((f) => <div>{f.t}<small>{f.s}</small></div>)}</div>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">SCOPE</p>
+    <h2 class="v2-h2">どこまで頼める？</h2>
+    <table class="v2-scope">
+      <tbody>{scope.map((s) => <tr><th>{s.a}</th><td>{s.b}</td><td class="who">{s.c}</td></tr>)}</tbody>
+    </table>
+    <div class="v2-not"><b>当事務所で行わないこと</b>境界確定・分筆・地積更正など登記に関わる測量は、土地家屋調査士さんの業務です。境界が関わる案件は、調査士さんと分担して進めます。</div>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">PROCESS</p>
+    <h2 class="v2-h2">どう進むの？</h2>
+    <div class="v2-sgrid">
+      {steps.map((s, i) => (
+        <div class="v2-step">
+          <svg class="v2-sicon" viewBox="0 0 48 48" aria-hidden="true"><path d={s.icon} /></svg>
+          <p class="n">STEP {i + 1}</p>
+          <h3>{s.t}</h3>
+          <p>{s.d}</p>
+        </div>
+      ))}
+    </div>
+    <p class="v2-lead">工事は施工業者さんが担当します。必要な手続きや順番は、土地と計画によって変わります。</p>
+    <p class="v2-lead">どれくらいかかるかは、自治体や土地の広さ、役所との事前の相談があるかで変わります。調査が終わった時点で目安をお伝えします。</p>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">DELIVERABLES</p>
+    <h2 class="v2-h2">何をお渡しする？</h2>
+    <div class="v2-deliv">
+      {deliv.map((d) => (<div><div class="v2-ph">画像（来週の現場から差し替え）</div><h3>{d.t}</h3><p>{d.d}</p></div>))}
+    </div>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">QUALIFICATION</p>
+    <h2 class="v2-h2">担当者</h2>
+    <p class="v2-lead">行政書士 {site.representative}。宅地造成設計士、測量士補、2級土木施工管理技士。土木・上下水道の設計と施工管理に15年。調査から申請、工事後の検査まで、この担当が最後までご一緒します。</p>
+  </section>
+
+  <section class="v2-sec">
+    <p class="v2-lbl">FAQ</p>
+    <h2 class="v2-h2">よくある質問</h2>
+    <dl class="v2-faq">{faq.map((f) => <div><dt>{f.q}</dt><dd>{f.a}</dd></div>)}</dl>
+  </section>
+</V2>
